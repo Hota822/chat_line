@@ -1,0 +1,15 @@
+current directory: /home/hota/chat_line/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+/home/linuxbrew/.linuxbrew/opt/ruby/bin/ruby -I /home/linuxbrew/.linuxbrew/Cellar/ruby/2.6.1/lib/ruby/2.6.0 -r ./siteconf20190318-4006-1tocd2i.rb extconf.rb
+creating Makefile
+
+current directory: /home/hota/chat_line/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /home/hota/chat_line/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /home/hota/chat_line/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20190318-4006-1i6xwub
