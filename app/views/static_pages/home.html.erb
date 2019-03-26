@@ -1,1 +1,28 @@
-hello world!
+<header>
+  <div class="col md-12">
+    <%= link_to "sample app", root_path, id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Help", '#' %></li>
+        <li><%= link_to "Users", '#' %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Account <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Profile", '#' %></li>
+            <li><%= link_to "Settings", '#' %></li>
+            <li>
+              <%= link_to "Log out", '#', method: :delete %>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="color-dark bg-main">
+  <h1>Chat like lINE</h1>
+</div>
