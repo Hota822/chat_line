@@ -22,3 +22,13 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+* Faoundation使用時の注意
+  * MotionUI未使用、使用したいときは faundation_and_overrides.scss:
+    // @imort ;motion-ui/motion-ui
+    // @include motion-ui-transitions;
+    // @include motion-ui-animations;
+  のコメントを外す
+  * ページレイアウトのヘッドタグに
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    を入れる
