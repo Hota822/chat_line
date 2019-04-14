@@ -4,3 +4,22 @@
 /* Add imports of custom sass/scss files here */
 
 
+#logo{
+  float: left;
+  margin-right: 10px;
+  font-size: 2em;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+#home-title{
+  font-size: 7em;
+  padding-top: 20px;
+}
+
+.nav{
+  height: 50px;
+  background-color: orange;
+}
