@@ -1,58 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <div>
-    <head>
-      <title>HOME</title>
-      <%= csrf_meta_tags %>
-      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-      <!--[if lt IE 9]>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
-        </script>
-      <![endif]-->
-    </head>
+<div class="text-center home-title" id="home-title">
+  Chat like LINE
+</div>
+<div>
+  <div class="text-center" style="padding-bottom:100px">
+      <%= link_to 'Log in / Sign up', login_path, class:"button warning large" %>
   </div>
-  <body>
-    <header>
-      <div class="nav">
-          <%= link_to "Chat like LINE", root_path, id: 'logo' %>
-        <nav>
-          <ul class="menu align-right">
-            <li><%= link_to "Help", '#' %></li>
-            <li><%= link_to "Friends", '#' %></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Account <b class="caret"></b>
-              </a>
-              <!--
-              <ul class="dropdown-menu">
-                <li><%= link_to "Profile", '#' %></li>
-                <li><%= link_to "Settings", '#' %></li>
-                <li>
-                  <%= link_to "Log out", '#', method: :delete %>
-                </li>
-              </ul>
-              -->
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    <div class="text-center home-title" id="home-title">
-      Chat like LINE
-    </div>
-
-    <div class="row">
-      <div class="columns text-center">
-        <h3 class="button warning large">Log in / Sign in</h3>
-      </div>
-    </div>
-    <footer>
-      <div class="nav">
-        <p></br></p>
-      </div>
-    </footer>
-    <%= debug(params) if Rails.env.development? %>
-  </body>
-</html>
+</div>
