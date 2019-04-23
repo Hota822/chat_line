@@ -21,12 +21,19 @@
 
 .nav{
   background-color: orange;
+  overflow: hidden;
 }
 
-.page-default{
-  margin-left: 3rem;
+body{
+  padding: auto;
+  margin: auto;
 }
 
+.login-form{
+  
+  padding: 0 30%;
+  margin: auto;
+}
 .d1{
   background-color:red;
 }

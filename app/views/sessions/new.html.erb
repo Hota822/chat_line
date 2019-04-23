@@ -1,39 +1,19 @@
 
-<h1>Log in</h1>
-
-<div class="row d1">
-  <div class="column d2">
-    <%= form_for(:session, url: login_path) do |f| %>
-
-      <%= f.label :email, class:'text-center' %>
-      <%= f.email_field :email, html:{class: 'form', type: 'text', placeholder: '.medium-6.cell' } %>
-
-      <%= f.label :password %>
-      <%= f.password_field :passowrd, class: 'form-control' %>
-
-      <%= f.submit "log in", class: 'button warning large' %>
-    <% end %>
-
-    <p>New User? <%= link_to 'Sign up now!', signup_path %></p>
-    <p>Forgot password?<%= link_to 'Reset password', '#' %> </p>
-  </div>
-</div>
-
-
-<div class="grid-x d3">
-  <div class="grid-y d4">
+<h3 class="text-center">Log in</h3>
+<div class="grid-x">
+  <div class=" text-center cell login-form">
     <%= form_for(:session, url: login_path) do |f| %>
 
       <%= f.label :email %>
-      <%= f.email_field :email, class: 'form' %>
+      <%= f.email_field :email %>
 
       <%= f.label :password %>
-      <%= f.password_field :passowrd, class: 'form-control' %>
+      <%= f.password_field :passowrd %>
 
-      <%= f.submit "log in", class: 'button warning large' %>
+      <%= f.submit "log in", class: 'primary large button' %>
     <% end %>
 
     <p class="page-default">New User? <%= link_to 'Sign up now!', signup_path %></p>
-    <p>Forgot password?<%= link_to 'Reset password', '#' %> </p>
+    <p>Forgot password? <%= link_to 'Reset password', '#' %> </p>
   </div>
 </div>
