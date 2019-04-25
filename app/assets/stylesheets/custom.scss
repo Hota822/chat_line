@@ -30,9 +30,22 @@ body{
 }
 
 .login-form{
-  
   padding: 0 30%;
   margin: auto;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  .form-control {
+    color: red;
+  }
 }
 .d1{
   background-color:red;
