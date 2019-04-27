@@ -1,14 +1,20 @@
-/*= require foundation
+/*= require foundation */
 
-@imort "foundation_and_overrides";
+
+/* @import "foundation_and_overrides"; */
 /* Add imports of custom sass/scss files here */
 
+  $primary-color: #1779ba;
+  $secondary-color: #767676;
+  $success-color: #3adb76;
+  $warning-color: #ffae00;
+  $alert-color: #cc4b37;
 
 #logo{
   float: left;
   margin-right: 10px;
   font-size: 2em;
-  color: black;
+  color: $primary-color;
   text-transform: uppercase;
   letter-spacing: -1px;
   font-weight: bold;
@@ -17,6 +23,10 @@
 #home-title{
   font-size: 7em;
   padding-top: 20px;
+}
+
+.home-button{
+  padding-bottom: 100px;
 }
 
 .nav{
@@ -35,17 +45,17 @@ body{
 }
 
 #error_explanation {
-  color: red;
   ul {
-    color: red;
+    color: $alert-color;
     margin: 0 0 30px 0;
   }
 }
 
 .field_with_errors {
-  .form-control {
     color: red;
-  }
+    label{
+      color: $alert-color;
+    }
 }
 .d1{
   background-color:red;
