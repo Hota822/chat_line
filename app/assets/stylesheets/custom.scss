@@ -29,15 +29,24 @@
   padding-bottom: 100px;
 }
 
+/*navigation bar*/
 .nav{
-  background-color: orange;
   overflow: hidden;
+  .menu{
+    a{
+      &:hover{
+        background: lighten($success-color,40%)
+      }
+    }
+  }
 }
 
+
 body{
-  padding: auto;
   margin: auto;
+  padding: auto;
 }
+
 
 .login-form{
   padding: 0 30%;
