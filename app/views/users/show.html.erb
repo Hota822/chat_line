@@ -1,4 +1,8 @@
-<div>
-  <%= gravatar_for(@user)%>
-  <%= @user.name %>
-</div>
+<% if current_user? %>
+  <div>
+    <%= gravatar_for(@user)%>
+    <%= @user.name %>
+  </div>
+<% else %>
+
+<% end %>
