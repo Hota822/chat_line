@@ -1,10 +1,14 @@
-    <li>
-      <%= link_to gravatar_for(friendship.user), friendship.user %>
-      <div>
+<li>
+  <div class="list_contents">
+    <div class="grid-x">
+      <div class="cell medium-9" >
+        <%= link_to gravatar_for(friendship.user), friendship.user %>
         <%= friendship.user.name %>
-        <div><%= friendship.user.id%></div>
-        <%= link_to 'Suubmit Friend request', friendship_user_path(friendship.user), method: :post,
-            class: 'button primary' %>
       </div>
-
-    </li>
+      <div class="cell medium-3 text-right align-self-bottom" >
+          <%= link_to 'Suubmit Friend request', friendship_user_path(friendship.user), method: :post,
+              class: 'button primary' %>
+      </div>
+    </div>
+  </div>
+</li>
