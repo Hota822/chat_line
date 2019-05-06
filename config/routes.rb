@@ -6,5 +6,13 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  resources :users
+  resources :users do
+    member do
+      get  '/friendrequest', to: 'friendships#new'
+      post '/friendrequest', to: 'friendships#friendrequest'
+      get  '/friendship', to: 'friendships#new'
+      post '/friendship', to: 'friendships#create'
+      get  '/friendlist', to: 'friendships#index'
+    end
+  end
 end

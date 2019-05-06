@@ -1,8 +1,23 @@
-<% if current_user? %>
-  <div>
-    <%= gravatar_for(@user)%>
-    <%= @user.name %>
-  </div>
-<% else %>
 
-<% end %>
+<div>
+  <%= gravatar_for(@user)%>
+  <%= @user.name %>
+  <% if current_user?(@user) %>
+      chat list
+  <% else %>
+    <%# if friend? %>
+        <%# true %>
+    <%# else %>
+      <%# if already send request? %>
+        <%#<div class="button success">
+          Already sent friend request
+        </div>%>
+      <%# else %>
+        <div style="margin: 1rem">
+            <%= link_to 'Send Friend Request', friendrequest_user_path(@user) ,method: :post,
+            class: 'button primary large' %>
+        </div>
+      <%# end %>
+    <%# end %>
+  <% end %>
+</div>

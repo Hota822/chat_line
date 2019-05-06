@@ -5,12 +5,17 @@
           <div class="top-bar-right">
           <ul class="menu align-right">
             <li><%= link_to "Help", '#' %></li>
-            <li><%= link_to "Friends", '#' %></li>
             <% if logged_in? %>
               <ul class="dropdown menu" data-dropdown-menu>
                 <li><a href="#">Account</a>
                   <ul class="menu">
                     <li><%= link_to "Profile", current_user %></li>
+                    <li><%= link_to "Friends", '#' %>
+                      <ul class="menu">
+                        <li><%= link_to "Friend Request", friendship_user_path(current_user) %></li>
+                        <li><%= link_to "Friend List" ,friendlist_user_path(current_user) %></li>
+                      </ul>
+                    </li>
                     <li><%= link_to "Settings", '#' %></li>
                     <li>
                       <%= link_to "Log out", logout_path, method: :delete %>

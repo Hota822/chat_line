@@ -83,6 +83,8 @@ GEM
     crass (1.0.4)
     erubi (1.8.0)
     execjs (2.7.0)
+    faker (1.7.3)
+      i18n (~> 0.5)
     ffi (1.10.0)
     foundation-rails (6.5.3.0)
       railties (>= 3.1.0)
@@ -90,7 +92,7 @@ GEM
       sprockets-es6 (>= 0.9.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.6.0)
+    i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
     jbuilder (2.8.0)
@@ -227,6 +229,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  faker (= 1.7.3)
   foundation-rails
   jbuilder (~> 2.5)
   jquery-rails
