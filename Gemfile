@@ -41,6 +41,7 @@ gem 'autoprefixer-rails'
 gem "jquery-rails"
 
 gem 'bcrypt', '3.1.12'
+gem 'faker',  '1.7.3'
 
 gem 'rails-controller-testing'
 

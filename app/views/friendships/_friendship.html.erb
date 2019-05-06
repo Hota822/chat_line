@@ -1,0 +1,10 @@
+    <li>
+      <%= link_to gravatar_for(friendship.user), friendship.user %>
+      <div>
+        <%= friendship.user.name %>
+        <div><%= friendship.user.id%></div>
+        <%= link_to 'Suubmit Friend request', friendship_user_path(friendship.user), method: :post,
+            class: 'button primary' %>
+      </div>
+
+    </li>

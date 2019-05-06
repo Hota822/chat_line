@@ -16,4 +16,19 @@ class User < ApplicationRecord
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
+  #送られているフレンドリクエストを返す
+  def friend_request
+    Friendship.where("request_id=?", id)
+  end
+
+  #友達の一覧を返す
+  def friend_list
+    Friendship.where("friend_id=?", id)
+  end
+
+  #渡されたユーザーが友達の場合、Trueを返す
+  def friend?(user)
+    #friend_list.include?(user)
+  end
 end
