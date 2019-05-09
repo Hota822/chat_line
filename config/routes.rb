@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   resources :users do
+    collection do
+      get 'search',  to: 'users#search'
+      get 'result', to: 'users#result'
+    end
     member do
       get  '/friendrequest', to: 'friendships#new'
       post '/friendrequest', to: 'friendships#friendrequest'
