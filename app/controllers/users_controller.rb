@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def new
     @user = User.new
   end
@@ -15,6 +16,19 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       render 'new'
+    end
+  end
+
+  def search
+  end
+
+  def result
+    @user = User.find_by(name: params[:name])
+    if @user
+      redirect_to @user
+    else
+      flash[:alert] = 'User not found. Please check a spelling'
+      redirect_to search_users_url
     end
   end
 
