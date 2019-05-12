@@ -1,0 +1,15 @@
+  <div class="list_contents">
+    <div class="grid-x">
+      <% unless talk.user.nil? %>
+        <div class="cell medium-2 icon" >
+          <div><%= link_to gravatar_for(talk.user, size: 40), talk.user %></div>
+          <div><%= talk.user.name %></div>
+          <div><%= talk.created_at.strftime("%m/%d %H:%M") %></div>
+        </div>
+        <div class="cell medium-10 text">
+          <%= talk.user.name %>
+          <%= talk.content %>
+        </div>
+      <% end %>
+    </div>
+  </div>

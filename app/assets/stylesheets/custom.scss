@@ -64,15 +64,22 @@ body{
     }
 }
 
-/* friendship */
-
 .list_contents{
+  border-right: 1px solid darkgray;
   border-bottom: 1px solid darkgray;
   padding: 10px;
   margin: 10px;
   font-size: 2rem;
   .list_button{
     vertical-align: bottom;
+  }
+  .text{
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
+  .icon{
+    font-size: 0.8rem;
+    border-right: 1px solid darkgray;
   }
 }
 

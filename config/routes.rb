@@ -19,4 +19,6 @@ Rails.application.routes.draw do
       get  '/friendlist', to: 'friendships#index'
     end
   end
+  resources :talk_rooms
+  resources :talks
 end

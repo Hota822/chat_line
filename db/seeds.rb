@@ -1,10 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
 User.create!(name:  "Example User",
   email: "example@railstutorial.org",
   password:              "password",
@@ -23,8 +17,35 @@ end
 
 #フレンド
 user = User.find(1)
-20.times do |n|
-  other_user = User.find(n+2)
+10.times do |n|
+  other_user = User.find(n+1)
   other_user.friendships.create(request_id: user.id)
-  print n
+  friend_user = User.find(n+11)
+  friend_user.friendships.create(friend_id: user.id)
+  user.friendships.create(friend_id: friend_user.id)
+end
+
+#トークルーム, トーク
+user = User.find(1)
+13.times do |n|
+  #一対一
+  talk_room = TalkRoom.create()
+  other_user = User.find(n+1)
+  talk_room.invite(user)
+  talk_room.invite(other_user)
+  5.times do
+    content = Faker::Lorem.sentence(5)
+    talk_room.talks.create(user_id: user.id, content: content)
+    content = Faker::Lorem.sentence(5)
+    talk_room.talks.create(user_id: other_user.id, content: content)
+  end
+  #グループ
+  if n > 10
+    group_user = User.find(n+2)
+    talk_room.invite(group_user)
+    5.times do
+      content = Faker::Lorem.sentence(5)
+      talk_room.talks.create(user_id: group_user.id, content: content)
+    end
+  end
 end
