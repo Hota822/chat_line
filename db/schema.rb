@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_050847) do
+ActiveRecord::Schema.define(version: 2019_05_12_045718) do
 
   create_table "friendships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -25,6 +25,33 @@ ActiveRecord::Schema.define(version: 2019_05_03_050847) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
+  create_table "talk_rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "talks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "talk_room_id"
+    t.index ["user_id", "created_at"], name: "index_talks_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_talks_on_user_id"
+  end
+
+  create_table "user_talkroom_relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "talk_room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["talk_room_id"], name: "index_user_talkroom_relations_on_talk_room_id"
+    t.index ["user_id", "talk_room_id"], name: "index_user_talkroom_relations_on_user_id_and_talk_room_id"
+    t.index ["user_id"], name: "index_user_talkroom_relations_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -35,4 +62,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_050847) do
   end
 
   add_foreign_key "friendships", "users"
+  add_foreign_key "talks", "users"
+  add_foreign_key "user_talkroom_relations", "talk_rooms"
+  add_foreign_key "user_talkroom_relations", "users"
 end

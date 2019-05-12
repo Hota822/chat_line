@@ -1,0 +1,18 @@
+  <%= form_for(@new_talk) do |f| %>
+    <div>
+      <%= f.hidden_field :user_id, {value: current_user.id} %>
+      <%= f.hidden_field :talk_room_id, {value: @new_talk.talk_room_id} %>
+    </div>
+    <div class="grid-x">
+      <div class="cell medium-11">
+        <%= f.text_field :content, placeholder: 'new message...' %>
+      </div>
+      <div class="cell medium-1">
+        <%= f.submit "Send", class: "button primary"%>
+      </div>
+    </div>
+  <% end %>
+
+<div>
+  <%= render @talks %>
+</div>

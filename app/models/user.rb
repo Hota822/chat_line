@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
+  has_many :user_talkroom_relations
+  has_many :talk_rooms, through: :user_talkroom_relations
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   before_save {self.email.downcase!}
   validates :name, presence: true, length:{ maximum: 30},
@@ -29,6 +31,6 @@ class User < ApplicationRecord
 
   #渡されたユーザーが友達の場合、Trueを返す
   def friend?(user)
-    #friend_list.include?(user)
+    list_id = self.friend_list.where("friend_id=?", user.id)
   end
 end
