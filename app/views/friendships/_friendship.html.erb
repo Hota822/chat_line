@@ -6,7 +6,7 @@
         <%= friendship.user.name %>
       </div>
       <div class="cell medium-3 text-right align-self-bottom" >
-          <%= link_to 'Suubmit Friend request', friendship_user_path(friendship.user), method: :post,
+          <%= link_to 'Submit Friend request', friendship_user_path(friendship.user), method: :get,
               class: 'button primary' %>
       </div>
     </div>
