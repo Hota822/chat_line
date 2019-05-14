@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :friend_requests, dependent: :destroy
   has_many :friendships, dependent: :destroy
   has_many :user_talkroom_relations
   has_many :talk_rooms, through: :user_talkroom_relations
@@ -20,9 +21,35 @@ class User < ApplicationRecord
   end
 
   #送られているフレンドリクエストを返す
-  def friend_request
-    Friendship.where("request_id=?", id)
+  def all_friend_request
+    FriendRequest.where("request_user_id=?", id)
   end
+
+  #与えられたユーザーとの関係を返す
+  def user_relation(other_user)
+    case
+    #when is_friend? return 'friend'
+    when received_request?(other_user) then return 'received_request'
+    when already_sent_request?(other_user) then return 'already_request'
+    when self == other_user then return 'current_user'
+    else
+        return 'non_friend'
+    end
+  end
+
+  #渡されユーザーから既に申請が来ている場合、True
+  def received_request?(user)
+    !(user.friend_requests.where("request_user_id=?", id).count == 0)
+  end
+
+  #渡されたユーザーに既に申請を送っていた場合True
+  def already_sent_request?(user)
+    !(friend_requests.where("request_user_id=?", user.id).count == 0)
+  end
+
+
+    #is_friend? return 'friend'
+    #current_user? return 'current_user'
 
   #友達の一覧を返す
   def friend_list
