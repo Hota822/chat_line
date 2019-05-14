@@ -15,12 +15,17 @@ User.create!(name:  name,
     password_confirmation: password)
 end
 
+#フレンドリクエスト
+user = User.find(1)
+10.times do |n|
+  request_user = User.find(n+2)
+  request_user.friend_requests.create(request_user_id: user.id)
+end
+
 #フレンド
 user = User.find(1)
 10.times do |n|
-  other_user = User.find(n+1)
-  other_user.friendships.create(request_id: user.id)
-  friend_user = User.find(n+11)
+  friend_user = User.find(n+12)
   friend_user.friendships.create(friend_id: user.id)
   user.friendships.create(friend_id: friend_user.id)
 end

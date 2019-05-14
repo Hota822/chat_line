@@ -2,10 +2,10 @@
 <div>
   <%= gravatar_for(@user)%>
   <%= @user.name %>
-  <% if current_user?(@user) %>
-      chat list
-  <% else %>
-    <% if friend? %>
+  <% case @user_relation %>
+  <% when 'current_user'%>
+    chat list
+  <% when 'friend'%>
       <div>
         <%# 一対一トーク%>
         <% talk_room = TalkRoom.find_by(id: current_user) %>
@@ -19,17 +19,17 @@
       <div>
         <%# グループトーク %>
       </div>
-    <% else %>
-      <%# if already send request? %>
-        <%#<div class="button success">
-          Already sent friend request
-        </div>%>
-      <%# else %>
-        <div style="margin: 1rem">
-            <%= link_to 'Send Friend Request', friendrequest_user_path(@user) ,method: :post,
-            class: 'button primary large' %>
-        </div>
-      <%# end %>
-    <% end %>
+  <% when 'non_friend' %>
+    <div class="list_contents">
+      <%= link_to 'Send Friend Request', friendrequest_user_path(@user) ,method: :post,
+          class: 'button primary large' %>
+    </div>
+  <% when 'already_request' %>
+    <% flash.now[:success] = "You still send friend request. Please wait to accept" %>
+  <% when 'received_request'%>
+    <% flash.now[:success] = "You received friendrequest from this user.If you accepet, click follow button" %>
+    <div class="list_contents">
+    <%= link_to 'Accept friend request', friendrequest_user_path(current_user) , method: :post,
+      class: 'button success large' %>
   <% end %>
 </div>

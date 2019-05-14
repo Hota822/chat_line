@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
       store_location
       flash[:alert] = "Please log in."
       redirect_to login_url
-    end 
-  end 
+    end
+  end
+
+  private
+    def user_relation(user)
+      @user_relation = current_user.user_relation(user)
+    end
 end

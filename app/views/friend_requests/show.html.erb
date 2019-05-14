@@ -1,0 +1,13 @@
+<div>
+  <% case @user_relation %>
+  <% when 'current_user' %>
+    <h1>Friend Request</h1>
+    <%= render @user.all_friend_request %>
+  <% when 'non_friend' %>
+    <div class="list-contents">
+      <%= link_to 'Send Friend Request', friendrequest_user_path(current_user) , method: :post,
+        class: 'button primary large' %>
+    </div>
+  <%# when received, already => render partial %>
+  <% end %>
+</div>

@@ -12,8 +12,8 @@ Rails.application.routes.draw do
       get 'result', to: 'users#result'
     end
     member do
-      get  '/friendrequest', to: 'friendships#new'
-      post '/friendrequest', to: 'friendships#friendrequest'
+      get  '/friendrequest', to: 'friend_requests#show'
+      post '/friendrequest', to: 'friend_requests#create'
       get  '/friendship', to: 'friendships#new'
       post '/friendship', to: 'friendships#create'
       get  '/friendlist', to: 'friendships#index'

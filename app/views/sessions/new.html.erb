@@ -1,7 +1,7 @@
 
 <h3 class="text-center">Log in</h3>
 <div class="grid-x">
-  <div class=" text-center cell login-form">
+  <div class=" text-center cell login_form">
     <%= form_for(:session, url: login_path) do |f| %>
 
       <%= f.label :email %>
@@ -13,7 +13,7 @@
       <%= f.submit "log in", class: 'primary large button' %>
     <% end %>
 
-    <p class="page-default">New User? <%= link_to 'Sign up now!', signup_path %></p>
+    <p>New User? <%= link_to 'Sign up now!', signup_path %></p>
     <p>Forgot password? <%= link_to 'Reset password', '#' %> </p>
   </div>
 </div>

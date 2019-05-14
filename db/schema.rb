@@ -10,18 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_12_045718) do
+ActiveRecord::Schema.define(version: 2019_05_14_093221) do
+
+  create_table "friend_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "request_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "request_user_id"], name: "index_friend_requests_on_user_id_and_request_user_id", unique: true
+    t.index ["user_id"], name: "index_friend_requests_on_user_id"
+  end
 
   create_table "friendships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "friend_id"
-    t.integer "request_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
-    t.index ["request_id"], name: "index_friendships_on_request_id"
     t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
-    t.index ["user_id", "request_id"], name: "index_friendships_on_user_id_and_request_id", unique: true
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
@@ -61,6 +67,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_045718) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "friend_requests", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "talks", "users"
   add_foreign_key "user_talkroom_relations", "talk_rooms"
