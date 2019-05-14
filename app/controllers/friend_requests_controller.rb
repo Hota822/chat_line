@@ -10,9 +10,12 @@ class FriendRequestsController < ApplicationController
   def create
     user_to = User.find(params[:id])
     user_relation(user_to)
-    redirect_to root_url unless @user_relation == 'non_friend'
-    user_from = current_user
-    user_from.friend_requests.create(request_user_id: user_to.id)
-    redirect_to user_to
+    debugger
+    unless @user_relation == 'non_friend'
+      redirect_to root_url
+    else
+      current_user.friend_requests.create(request_user_id: user_to.id)
+      redirect_to user_to
+    end
   end
 end
