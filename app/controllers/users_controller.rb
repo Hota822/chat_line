@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:show, :search, :result, :index]
 
   def new
     @user = User.new
@@ -31,6 +32,10 @@ class UsersController < ApplicationController
       flash[:alert] = 'User not found. Please check a spelling'
       redirect_to search_users_url
     end
+  end
+
+  def index
+    @friends = current_user.friendships
   end
 
   private

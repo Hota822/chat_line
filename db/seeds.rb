@@ -26,8 +26,7 @@ end
 user = User.find(1)
 10.times do |n|
   friend_user = User.find(n+12)
-  friend_user.friendships.create(friend_id: user.id)
-  user.friendships.create(friend_id: friend_user.id)
+  friend_user.friend_relations_to.create(friend_id: user.id)
 end
 
 #トークルーム, トーク

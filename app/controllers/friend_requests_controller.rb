@@ -10,7 +10,6 @@ class FriendRequestsController < ApplicationController
   def create
     user_to = User.find(params[:id])
     user_relation(user_to)
-    debugger
     unless @user_relation == 'non_friend'
       redirect_to root_url
     else

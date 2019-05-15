@@ -6,7 +6,7 @@
         <%= friend_request.user.name %>
       </div>
       <div class="cell medium-3 text-right align-self-bottom" >
-          <%= link_to 'Accept Friend request', friendrequest_user_path(friend_request.user), method: :get,
+          <%= link_to 'Accept Friend request', friendrelation_user_path(friend_request.user), method: :post,
               class: 'button primary' %>
       </div>
     </div>

@@ -3,13 +3,8 @@ require 'test_helper'
 class FriendRequestTest < ActiveSupport::TestCase
 
   def setup
-    @user = users(:michael)
-    @request_user = users(:archer)
-    @friend_user = users(:lana)
-    @non_friend = users(:malory)
-    @one = friend_requests(:one)
-    @one.request_user_id = @user.id
-    @one.save
+    set_instance_variables
+    @one = @request_user.friend_requests.build(request_user_id: @user.id)
   end
 
   test "should be valid" do
@@ -26,6 +21,7 @@ class FriendRequestTest < ActiveSupport::TestCase
 
   test "user_relation should return valid information" do
     #user relation == friend
+    @one.save
     assert_equal 'received_request', @user.user_relation(@request_user)
     assert_equal 'already_request',  @request_user.user_relation(@user)
     assert_equal 'current_user',     @user.user_relation(@user)
