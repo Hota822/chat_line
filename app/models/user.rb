@@ -1,7 +1,18 @@
 class User < ApplicationRecord
   has_many :friend_requests, dependent: :destroy
-  has_many :friendships, dependent: :destroy
-  has_many :user_talkroom_relations
+  has_many :friend_relations_to, class_name: 'FriendRelation',
+                                  foreign_key: 'user_id',
+                                  dependent: :destroy
+  has_many :friendships_to, through: :friend_relations_to, source: :friend
+  has_many :friend_relations_from, class_name: 'FriendRelation',
+                                  foreign_key: 'friend_id',
+                                  dependent: :destroy
+  has_many :friendships_from, through: :friend_relations_from, source: :user
+  def friendships
+    #申請出された　＋　申請出した
+    friendships_from + friendships_to
+  end
+  has_many :user_talkroom_relations, dependent: :destroy
   has_many :talk_rooms, through: :user_talkroom_relations
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   before_save {self.email.downcase!}
@@ -28,7 +39,7 @@ class User < ApplicationRecord
   #与えられたユーザーとの関係を返す
   def user_relation(other_user)
     case
-    #when is_friend? return 'friend'
+    when friend?(other_user) then return 'friend'
     when received_request?(other_user) then return 'received_request'
     when already_sent_request?(other_user) then return 'already_request'
     when self == other_user then return 'current_user'
@@ -47,9 +58,21 @@ class User < ApplicationRecord
     !(friend_requests.where("request_user_id=?", user.id).count == 0)
   end
 
+  #渡されたユーザーがフレンドのとき、True
+  def friend?(user)
+    friendships.include?(user)
+  end
 
-    #is_friend? return 'friend'
-    #current_user? return 'current_user'
+  #渡されたユーザーからのフレンド申請を削除する
+  def delete_friendrequest(user)
+    user.friend_requests.find_by(request_user_id: self.id).destroy
+  end
+
+  #渡されたユーザーを友達に追加する
+  def add_friend(user)
+    delete_friendrequest(user)
+    friendships_to << user
+  end
 
   #友達の一覧を返す
   def friend_list
@@ -57,7 +80,7 @@ class User < ApplicationRecord
   end
 
   #渡されたユーザーが友達の場合、Trueを返す
-  def friend?(user)
-    list_id = self.friend_list.where("friend_id=?", user.id)
+  def old_friend?(user)
+    #list_id = self.friend_list.where("friend_id=?", user.id)
   end
 end

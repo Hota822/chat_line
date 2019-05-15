@@ -3,13 +3,8 @@ require 'test_helper'
 class FriendRequestsControllerTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:michael)
-    @request_user = users(:archer)
-    #@friend_user = users(:lana)
-    #@non_friend = users(:malory)
-    @one = friend_requests(:one)
-    @one.request_user_id = @user.id
-    @one.save
+    set_instance_variables
+    @request_user.friend_requests.create(request_user_id: @user.id)
   end
 
   test "should get show (when logged in)" do

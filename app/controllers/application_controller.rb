@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
     def user_relation(user)
       @user_relation = current_user.user_relation(user)
     end
+
+    #def permitted_user?(permitted_relation)
+      #@user_relation.include?(permitted_relation)
+    #end
 end

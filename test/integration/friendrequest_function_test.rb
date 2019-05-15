@@ -2,11 +2,10 @@ require 'test_helper'
 
 class FriendrequestFunctionTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:michael)
-    @request_user = users(:archer)
-    @friend_user = users(:lana)
-    @non_friend = users(:malory)
+    set_instance_variables
   end
+  #・フレンド申請一覧
+  #・フレンド申請の新規作成
 
   test "create new request with valid user" do
     log_in_test(@non_friend)
@@ -28,16 +27,14 @@ class FriendrequestFunctionTest < ActionDispatch::IntegrationTest
 
   test "show have friend request list" do
     log_in_test(@user)
-    @one = friend_requests(:one)
-    @one.request_user_id = @user.id
-    @one.save
+    @request_user.friend_requests.create(request_user_id: @user.id)
     get friendrequest_user_path(@user)
     assert_template 'friend_requests/show'
     #assert_template partial: '_friend_request'
     assert_match  'Friend Request', response.body
-    assert_select "a[href=?]", friendrequest_user_path(@request_user)
-    assert_select "a[href=?]", friendrequest_user_path(@friend_user), count: 0
-    assert_select "a[href=?]", friendrequest_user_path(@non_friend), count: 0
+    assert_select "a[href=?]", friendrelation_user_path(@request_user)
+    assert_select "a[href=?]", friendrelation_user_path(@friend_user), count: 0
+    assert_select "a[href=?]", friendrelation_user_path(@non_friend), count: 0
   end
 
 end

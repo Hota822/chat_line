@@ -4,8 +4,9 @@
     <h1>Friend Request</h1>
     <%= render @user.all_friend_request %>
   <% when 'non_friend' %>
+  <%# need to change => partial%>
     <div class="list_contents">
-      <%= link_to 'Send Friend Request', friendrequest_user_path(current_user) , method: :post,
+      <%= link_to 'Send Friend Request', friendrelation_user_path(current_user) , method: :post,
         class: 'button primary large' %>
     </div>
   <%# when received, already => render partial %>

@@ -14,9 +14,8 @@ Rails.application.routes.draw do
     member do
       get  '/friendrequest', to: 'friend_requests#show'
       post '/friendrequest', to: 'friend_requests#create'
-      get  '/friendship', to: 'friendships#new'
-      post '/friendship', to: 'friendships#create'
-      get  '/friendlist', to: 'friendships#index'
+      post '/friendrelation', to: 'friend_relations#create'
+      get  '/friendships', to: 'users#index'
     end
   end
   resources :talk_rooms

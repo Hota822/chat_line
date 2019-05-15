@@ -69,4 +69,15 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "each method should response correctly" do
+    set_instance_variables
+    @request_user.friend_requests.create(request_user_id: @user.id)
+    @friend_user.friend_relations_to.create(friend_id: @user.id)
+    assert_not @user.friend?(@non_friend)
+    assert_not @user.friend?(@request_user)
+    assert @user.friend?(@friend_user)
+    @user.add_friend(@request_user)
+    assert @user.friend?(@request_user)
+  end
+
 end
