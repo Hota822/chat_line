@@ -1,0 +1,25 @@
+<%# for friend_user page, group talk %>
+<div class=list_contents>
+  <div class="grid-x">
+    <div class="cell medium-3">
+      <% %>
+      <% talk_room.users.each do|user| %>
+        <%= gravatar_for(user, size: 30) %>
+      <% end %>
+      <div>Group Talk</div>
+    </div>
+    <div class="cell medium-7">
+      <div class=" sentence text">Room Name : <%= talk_room.name %></div>
+      <% latest_talks = get_latest_talk(talk_room, sentence: 1) %>
+      <% latest_talks.each do |talk| %>
+        <div class="text sentence">
+          <%= gravatar_for(talk.user, size: 20)%>
+          <%= talk.content %>
+        </div>
+      <% end %>
+    </div>
+    <div class="cell medium-2 text-right align-self-bottom ">
+      <%= link_to "Go to Talk Room", talk_room, class: 'button primary' %>
+    </div>
+  </div>
+</div>

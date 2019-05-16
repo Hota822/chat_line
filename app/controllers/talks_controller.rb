@@ -2,7 +2,7 @@ class TalksController < ApplicationController
 
   def create
     talk = Talk.create(talk_params)
-    redirect_to session[:forwarding_url]
+    redirect_to talk.talk_room
   end
 
   private
