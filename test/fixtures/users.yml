@@ -18,3 +18,8 @@ malory:
   name: Malory Archer
   email: boss@example.gov
   password_digest: <%= User.digest('password') %>
+
+david:
+  name: David
+  email: david@example.gov
+  password_digest: <%= User.digest("password") %>

@@ -8,7 +8,7 @@ class FriendRelationsController < ApplicationController
     @user_from = User.find(params[:id])
     @user_to.add_friend(@user_from)
     flash.now[:success] = "#{@user_from.name} become your friends!"
-    redirect_to @user_from
+    redirect_to friendrequest_user_path(@user_to)
   end
 
   private

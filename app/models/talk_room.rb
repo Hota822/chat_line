@@ -5,7 +5,9 @@ class TalkRoom < ApplicationRecord
 
   #トークルームに招待する
     def invite(other_user)
+      #コントローラでのパーミッション必要
       users <<  other_user
+      self.update_attributes(group_talk: true) if self.users.count == 3
     end
 
   #トークルームからキックする

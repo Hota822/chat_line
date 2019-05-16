@@ -1,11 +1,28 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<% time_now = Time.now %>
+<% 5.times do |n| %>
+talk_<%= n %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= time_now - (60 * n * 2 ) %>
+  user: michael
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+talk_<%= n + 5 %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= time_now - (60 * n * 2 - 30) %>
+  user: lana
+
+talk_<%= n + 10 %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= time_now - (60 * n * 2) %>
+  user: michael
+
+talk_<%= n + 15 %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= time_now - (60 * n * 2 - 20) %>
+  user: lana
+
+talk_<%= n + 20 %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= time_now - (60 * n * 2 - 40) %>
+  user: david
+
+<% end %>

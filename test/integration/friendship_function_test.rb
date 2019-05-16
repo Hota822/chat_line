@@ -14,7 +14,7 @@ class FriendshipFunctionTest < ActionDispatch::IntegrationTest
       post friendrelation_user_path(@request_user), params:{ id: @request_user.id }
     end
     assert_equal 'friend', user_relation_test(@request_user)
-    assert_redirected_to @request_user
+    assert_redirected_to friendrequest_user_path(@user)
     follow_redirect!
   end
 
