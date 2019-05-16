@@ -26,6 +26,8 @@ class VeiwOfUserPageTest < ActionDispatch::IntegrationTest
     add_friend_test(@user, @friend_user)
     add_friend_test(@user, @other_friend)
     get user_path(@user)
+    assert_match '1 vs 1', response.body
+    assert_match 'Group Talk', response.body
 
 end
 

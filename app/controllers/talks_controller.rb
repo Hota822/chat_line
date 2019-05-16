@@ -2,6 +2,7 @@ class TalksController < ApplicationController
 
   def create
     talk = Talk.create(talk_params)
+    talk.talk_room.touch
     redirect_to talk.talk_room
   end
 

@@ -4,14 +4,17 @@
   <%= @user.name %>
   <% case @user_relation %>
   <% when 'current_user'%>
-    chat list
+    <h3>Talk List</h3>
+    <%= render collection: @owntalkrooms, partial: 'owntalkroom' %>
   <% when 'friend'%>
     <h3>Your talk</h3>
-    <div id="each_talk">
+    <div>
       <% if @each_talk_room.count == 0 %>
         <div class="list_contents">
           You have no 1vs1 talk.
-          <%= link_to "Start to talk with this user", '#', method: :post, class: 'button primary' %>
+          <%= link_to "Start to talk with this user", talk_rooms_path(params: {id: @user.id }), method: :post,
+                                                                       class: 'button primary',
+                                                                       user_id: @user.id %>
         </div>
       <% else %>
         <%= render collection: @each_talk_room, partial: 'room' %>

@@ -78,9 +78,4 @@ class User < ApplicationRecord
   def friend_list
     Friendship.where("friend_id=?", id)
   end
-
-  #渡されたユーザーが友達の場合、Trueを返す
-  def old_friend?(user)
-    #list_id = self.friend_list.where("friend_id=?", user.id)
-  end
 end
