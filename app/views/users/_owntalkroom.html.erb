@@ -1,0 +1,40 @@
+<% if @owntalkrooms.count == 0 %>
+  <div class="list_contents">
+    <div> You have no talks.Seach user and start to talk.</div>
+    <div><%= link_to 'Search User', search_users_path , class: 'text-center button primary'%></div>
+  </div>
+<% else %>
+  <% if owntalkroom.group_talk == true %>
+    <% view_params ={size: {list: 30, user: 20}, sentence: 1, classification: 'Group_Talk' } %>
+  <% else %>
+    <% view_params ={size: {list: 50, user: 30}, sentence: 3, classification: '1 vs 1' } %>
+  <% end %>
+
+  <div class=list_contents>
+    <div class="grid-x own_list">
+      <div class="cell medium-3">
+        <% %>
+        <% owntalkroom.users.each do|user| %>
+          <%= gravatar_for(user, size: view_params[:size][:list] ) %>
+        <% end %>
+        <div><%= view_params[:classification] %></div>
+      </div>
+      <div class="cell medium-7">
+        <div class=" sentence text">Room Name : <%= owntalkroom.name %></div>
+        <% latest_talks = get_latest_talk(owntalkroom, sentence: view_params[:sentence]) %>
+        <% latest_talks.each do |talk| %>
+          <div class="text sentence">
+            <%= gravatar_for(talk.user, size: view_params[:size][:user])%>
+            <%= talk.content %>
+          </div>
+        <% end %>
+      </div>
+      <div class="cell medium-2 text-right align-self-bottom ">
+        <%= link_to "Go to Talk Room", owntalkroom, class: 'button primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+

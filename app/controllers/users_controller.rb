@@ -20,17 +20,11 @@ class UsersController < ApplicationController
       end
       unless each_talk_room_ids.nil?
         @talk_rooms = TalkRoom.where("id IN (?)", each_talk_room_ids)
-        #@talk_rooms = TalkRoom.find(each_talk_room_ids)
-        #@each_talk_room = TalkRoom.where('group_talk = false AND id = ?', each_talk_room_ids)
-        #@each_talk_room = TalkRoom.find_by(group_talk: false, id: each_talk_room_ids)
         @each_talk_room = @talk_rooms.where("group_talk = false")
-        #@each_talk_room = @talk_rooms.find_by(group_talk: false)
-        #@talk_rooms = @talk_rooms - @each_talk_room
         @talk_rooms = @talk_rooms.where("group_talk = true")
-        #@talk_rooms = @talk_rooms.where("id <> ?", @each_talk_room.id) unless @each_talk_room.nil?
       end
     when 'current_user'
-      @own_talk_rooms = current_user.talk_rooms
+      @owntalkrooms = current_user.talk_rooms.order(updated_at: :desc)
     end
   end
 
