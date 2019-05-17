@@ -18,6 +18,12 @@ Rails.application.routes.draw do
       get  '/friendships', to: 'users#index'
     end
   end
-  resources :talk_rooms
+  resources :talk_rooms do
+    member do
+      get  '/invite', to: 'user_talkroom_relations#new'
+      post '/invite', to: 'user_talkroom_relations#create'
+    end
+  end
   resources :talks
+  get 'attempt', to: 'user_talkroom_relations#attempt'
 end

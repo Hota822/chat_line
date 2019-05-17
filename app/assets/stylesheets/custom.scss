@@ -64,6 +64,11 @@ body{
     }
 }
 
+.sub_menu{
+  border-right: 1px solid darkgray;
+  background-color: rgba(orange, 0.5);
+}
+
 .list_contents{
   border-right: 1px solid darkgray;
   border-bottom: 1px solid darkgray;
@@ -83,6 +88,9 @@ body{
   .icon{
     font-size: 0.8rem;
     border-right: 1px solid darkgray;
+  }
+  input[type=checkbox] {
+    transform: scale(2.5);
   }
 }
 

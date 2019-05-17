@@ -2,14 +2,13 @@ class TalkRoomsController < ApplicationController
   before_action :logged_in_user
 
   def show
-    talk_room = TalkRoom.find(params[:id])
+    @talk_room = TalkRoom.find(params[:id])
     @user = current_user
-    @talks = talk_room.talks
-    @new_talk = talk_room.talks.build()
+    @talks = @talk_room.talks
+    @new_talk = @talk_room.talks.build()
   end
 
   def create
-    debugger
     @user = User.find(params[:id])
     user_relation(@user)
     if @user_relation == 'friend'
@@ -22,7 +21,9 @@ class TalkRoomsController < ApplicationController
 
   def new
     @friends = current_user.friendships
-    @firend = current_user.friendships.first
+    @friend = @friends.first
+    @user = User.find(1)
+    debugger
   end
 
 end
