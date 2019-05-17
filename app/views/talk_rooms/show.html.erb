@@ -1,17 +1,30 @@
-  <%= form_for(@new_talk) do |f| %>
-    <div>
-      <%= f.hidden_field :user_id, {value: current_user.id} %>
-      <%= f.hidden_field :talk_room_id, {value: @new_talk.talk_room_id} %>
+<div class="grid-x">
+  <div class="cell medium-3 sub_menu">
+    <%="Room : #{@talk_room.name}" %>
+  </div>
+  <div class="cell medium-6 sub_menu">
+    <%= "#{pluralize(@talk_room.users.count, 'Member')} :" %>
+    <%= link_to "show all members", '#'%>
+  </div>
+  <div class="cell medium-3 sub_menu">
+    <%= link_to "Invite User", invite_talk_room_path(@talk_room.id) %>
+  </div>
+</div>
+
+<%= form_for(@new_talk) do |f| %>
+  <div>
+    <%= f.hidden_field :user_id, {value: current_user.id} %>
+    <%= f.hidden_field :talk_room_id, {value: @talk_room_id} %>
+  </div>
+  <div class="grid-x">
+    <div class="cell medium-11">
+      <%= f.text_field :content, placeholder: 'new message...' %>
     </div>
-    <div class="grid-x">
-      <div class="cell medium-11">
-        <%= f.text_field :content, placeholder: 'new message...' %>
-      </div>
-      <div class="cell medium-1">
-        <%= f.submit "Send", class: "button primary"%>
-      </div>
+    <div class="cell medium-1">
+      <%= f.submit "Send", class: "button primary"%>
     </div>
-  <% end %>
+  </div>
+<% end %>
 
 <div>
   <%= render @talks %>

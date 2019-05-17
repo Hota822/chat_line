@@ -1,0 +1,6 @@
+<h3>Invite Friend User</h3>
+<%= form_tag(invite_talk_room_path(@talk_room), method: :post) do %>
+  <div><%= hidden_field_tag :id, @talk_room.id %></div>
+  <div><%= submit_tag 'Invite' ,class: 'button center' %></div>
+  <div class="list_contents"><%= render collection: @friends, partial: 'friend' %></div>
+<% end %>

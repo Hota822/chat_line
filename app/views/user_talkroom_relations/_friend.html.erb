@@ -1,0 +1,11 @@
+<div class="grid-x ">
+  <div class="cell medium-7">
+    <%= gravatar_for(friend, size: 30) %>
+    <%= friend.name %>
+  </div>
+  <div class="cell medium-5">
+  <span>
+    <%= check_box 'friend',friend.id,{ checked: false }, true, false  %>
+  </span>
+  </div>
+</div>

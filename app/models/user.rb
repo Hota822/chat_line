@@ -78,4 +78,9 @@ class User < ApplicationRecord
   def friend_list
     Friendship.where("friend_id=?", id)
   end
+
+  #友達のidすべてを返す
+  def friendship_ids
+    friendships_to_ids + friendships_from_ids
+  end
 end
