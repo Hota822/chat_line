@@ -23,7 +23,6 @@ class TalkRoomsController < ApplicationController
     @friends = current_user.friendships
     @friend = @friends.first
     @user = User.find(1)
-    debugger
   end
 
 end
