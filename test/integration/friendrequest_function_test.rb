@@ -30,7 +30,6 @@ class FriendrequestFunctionTest < ActionDispatch::IntegrationTest
     @request_user.friend_requests.create(request_user_id: @user.id)
     get friendrequest_user_path(@user)
     assert_template 'friend_requests/show'
-    #assert_template partial: '_friend_request'
     assert_match  'Friend Request', response.body
     assert_select "a[href=?]", friendrelation_user_path(@request_user)
     assert_select "a[href=?]", friendrelation_user_path(@friend_user), count: 0
