@@ -24,9 +24,9 @@ class TalkRoomsController < ApplicationController
   end
 
   def new
-    @friends = current_user.friendships
-    @friend = @friends.first
-    @user = User.find(1)
+    flash.now[:success] = 'please find user, and then stat to talk.<br>'
+    flash.now[:success] += 'If you want to group talk, please invite after 1vs1 talk'
+    render 'users/search'
   end
 
   def members

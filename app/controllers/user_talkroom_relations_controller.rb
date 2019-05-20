@@ -32,7 +32,6 @@ class UserTalkroomRelationsController < ApplicationController
       flash[:success] = "Add follow user: " + flash[:success]
     end
     redirect_to talk_room
-
   end
 
   def attempt
