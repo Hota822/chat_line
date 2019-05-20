@@ -4,8 +4,12 @@ class TalkRoomsController < ApplicationController
   def show
     @talk_room = TalkRoom.find(params[:id])
     @user = current_user
-    @talks = @talk_room.talks
-    @new_talk = @talk_room.talks.build()
+    if @talk_room.users.include?(@user)
+      @talks = @talk_room.talks
+      @new_talk = @talk_room.talks.build()
+    else
+      no_permission
+    end
   end
 
   def create
@@ -23,6 +27,11 @@ class TalkRoomsController < ApplicationController
     @friends = current_user.friendships
     @friend = @friends.first
     @user = User.find(1)
+  end
+
+  def members
+    @talk_room = TalkRoom.find(params[:id])
+    @members = @talk_room.users
   end
 
 end

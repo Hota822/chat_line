@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def no_permission
+    flash[:alert] = 'you dont have permission'
+    redirect_to root_url
+  end
+
   private
     def user_relation(user)
       @user_relation = current_user.user_relation(user)

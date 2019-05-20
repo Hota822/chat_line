@@ -18,6 +18,7 @@ class UserTalkroomRelationsController < ApplicationController
     friend_ids.each do |n|
       invited_user << n if params[:friend]["#{n}"]
     end
+    flash[:success] = ""
     invited_user.each do |n|
       #newの時点でも必要
       unless talk_room.user_ids.include?(n)
@@ -26,10 +27,10 @@ class UserTalkroomRelationsController < ApplicationController
         flash[:success] += "  ・#{user.name}, "
       end
     end
-    if flash.any?
-      flash[:success] = "Add follow user:</br>" + flash[:success]
-    else
+    if flash[:success] == ""
       flash[:alert] = "Selected user has already joined this talk room"
+    else
+      flash[:success] = "Add follow user: " + flash[:success]
     end
     redirect_to talk_room
 
