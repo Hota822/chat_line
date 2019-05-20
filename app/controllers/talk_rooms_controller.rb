@@ -31,7 +31,7 @@ class TalkRoomsController < ApplicationController
 
   def members
     @talk_room = TalkRoom.find(params[:id])
-    @members = @talk_room.users
+    @listusers = @talk_room.users
   end
 
 end

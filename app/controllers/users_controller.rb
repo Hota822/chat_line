@@ -24,7 +24,7 @@ class UsersController < ApplicationController
         @talk_rooms = @talk_rooms.where("group_talk = true")
       end
     when 'current_user'
-      @owntalkrooms = current_user.talk_rooms.order(updated_at: :desc)
+      @talk_rooms = current_user.talk_rooms.order(updated_at: :desc)
     end
   end
 
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @friends = current_user.friendships
+    @listusers = current_user.friendships
   end
 
   private
