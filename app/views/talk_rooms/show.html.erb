@@ -4,17 +4,17 @@
   </div>
   <div class="cell medium-6 sub_menu">
     <%= "#{pluralize(@talk_room.users.count, 'Member')} :" %>
-    <%= link_to "show all members", '#'%>
+    <%= link_to "show all members", members_talk_room_path(@talk_room) %>
   </div>
   <div class="cell medium-3 sub_menu">
-    <%= link_to "Invite User", invite_talk_room_path(@talk_room.id) %>
+    <%= link_to "Invite User", invite_talk_room_path(@talk_room) %>
   </div>
 </div>
 
 <%= form_for(@new_talk) do |f| %>
   <div>
     <%= f.hidden_field :user_id, {value: current_user.id} %>
-    <%= f.hidden_field :talk_room_id, {value: @talk_room_id} %>
+    <%= f.hidden_field :talk_room_id, {value: @talk_room.id} %>
   </div>
   <div class="grid-x">
     <div class="cell medium-11">

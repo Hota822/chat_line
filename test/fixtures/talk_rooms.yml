@@ -1,6 +1,6 @@
 vs:
-  name: 'vs'
+  name: vs
 
 group:
-  name: 'group'
+  name: group
   group_talk: true
