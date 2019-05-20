@@ -5,7 +5,14 @@
   <% case @user_relation %>
   <% when 'current_user'%>
     <h3>Talk List</h3>
-    <%= render collection: @owntalkrooms, partial: 'owntalkroom' %>
+    <% if @talk_rooms.count == 0 %>
+      <div class="list_contents">
+        <div> You have no talks.Seach user and start to talk.</div>
+        <div><%= link_to 'Search User', search_users_path , class: 'text-center button primary'%></div>
+      </div>
+    <% else %>
+      <%= render @talk_rooms %>
+    <% end %>
   <% when 'friend'%>
     <h3>Your talk</h3>
     <div>
@@ -17,7 +24,7 @@
                                                                        user_id: @user.id %>
         </div>
       <% else %>
-        <%= render collection: @each_talk_room, partial: 'room' %>
+        <%= render collection: @each_talk_room, partial: 'talk_rooms/vsroom' %>
       <% end %>
     </div>
     <div>

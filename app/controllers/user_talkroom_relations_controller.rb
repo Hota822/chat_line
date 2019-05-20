@@ -20,7 +20,6 @@ class UserTalkroomRelationsController < ApplicationController
     end
     flash[:success] = ""
     invited_user.each do |n|
-      #newの時点でも必要
       unless talk_room.user_ids.include?(n)
         user = User.find(n)
         talk_room.invite(user)
