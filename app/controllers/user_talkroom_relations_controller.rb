@@ -34,8 +34,5 @@ class UserTalkroomRelationsController < ApplicationController
     redirect_to talk_room
   end
 
-  def attempt
-    render 'attemptings/attempt'
-  end
 end
 

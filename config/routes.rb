@@ -26,5 +26,7 @@ Rails.application.routes.draw do
     end
   end
   resources :talks
-  get 'attempt', to: 'user_talkroom_relations#attempt'
+  get  'attempt', to: 'talk_rooms#attempt'
+  post 'attempt', to: 'talk_rooms#attemptpost'
+
 end

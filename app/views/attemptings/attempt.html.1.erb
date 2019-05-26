@@ -1,0 +1,21 @@
+  <script type="text/javascript">
+    $(function(){
+      $("#sepu").load("shapes/fraction.html");
+    })
+  </script>
+
+  <div id="sepu">
+  
+  </div>
+
+  <div class="attempt">
+  <%= form_tag(attempt_path, remote: true) do %>
+    <%= text_field_tag :valtype %>
+    <div id="sep" class="<%= "#{@valtype}" %>">
+
+
+    </div>
+    <%= submit_tag "タイトルを変更する" %>
+  <% end %>
+</div>
+

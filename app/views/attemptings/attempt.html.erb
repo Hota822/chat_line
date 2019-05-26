@@ -1,8 +1,35 @@
-<div><%= params[:friend] %>
-</div>
-<div>/</div>
-<div>
-  <%= params[:id]%>
-</div>
 
 
+
+  <div class="attempt">
+    <%= form_tag(attempt_path, remote: true) do %>
+      <div class="grid-x">
+        <div class="cell medium-1">
+          <div id="fraction">
+            <% val = '#sep' %>
+            <%#= link_to 'frc', onclick: "$(function(){$(#{val}).load('symbols/fraction.html');})" %>
+          </div>
+        </div>
+      </div>
+      <%= text_field_tag :valtype %>
+      <%= hidden_field_tag :before_focus_id, 'last' %>
+      <div class="text_space">
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        <div id="sep1"></div>
+        <div id="sep2"></div>
+        <div id="sep3"></div>
+        <div id="sep4"></div>
+        <div id="sep5"></div>
+        <div id="aaa">aaaaaaaaaaaaa</div>
+      </div>
+      <div>
+      <div><%= link_to 'link', '#', id: 'last' %></div>
+      <%= submit_tag "タイトルを変更する" %>
+      </div>
+    <% end %>
+  </div>
+
+<div class="block" id="block1">
+    <p class="hoge" id="hoge1">トリガー1</p>
+    <p class="fuga" id="fuga1">ターゲット1</p>
+</div>

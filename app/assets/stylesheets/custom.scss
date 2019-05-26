@@ -94,6 +94,15 @@ body{
   }
 }
 
+/* math symbols */
+.fraction_top{
+  background-color: rgba(red, 0.1);
+}
+.fraction_bottom{
+  background-color: rgba(blue, 0.1);
+  border-top: 3px solid black;
+}
+
 .d1{
   background-color:red;
 }
@@ -108,4 +117,14 @@ body{
 }
 .d5{
   background-color: blue;
+}
+
+.attempt{
+  .s1{
+    color: blue;
+  }
+  .s2{
+    color: red;
+  }
+
 }

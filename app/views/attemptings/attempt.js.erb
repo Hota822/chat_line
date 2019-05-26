@@ -1,0 +1,15 @@
+//let element = document.getElementById("sep");
+//element.className = "<%= @valtype %>";
+
+var current = document.activeElement;
+var element = document.getElementById(<%= @before_focus_id %>);
+console.log('start');
+console.log(<%= @before_focus_id %>);
+console.log(current);
+console.log(element);
+console.log('end');
+
+
+$(function(){
+  $(<%= @before_focus_id %>).load("symbols/fraction.html.erb");
+})
