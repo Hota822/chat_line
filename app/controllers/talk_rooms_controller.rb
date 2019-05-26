@@ -34,4 +34,19 @@ class TalkRoomsController < ApplicationController
     @listusers = @talk_room.users
   end
 
+  def attempt
+    #instead of show
+    @valtype = 's2'
+    render 'attemptings/attempt'
+  end
+
+  def attemptpost
+    @valtype = params[:valtype]
+    @before_focus_id = params[:before_focus_id]
+    print @before_focus_id
+    respond_to do |format|
+      format.html { redirect_to root_path}
+      format.js { render 'attemptings/attempt'}
+    end
+  end
 end
