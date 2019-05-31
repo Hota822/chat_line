@@ -95,6 +95,15 @@ body{
 }
 
 /* math symbols */
+.symbol{
+  float: left;
+  margin-right: 0.1rem;
+  margin-left: 0.1rem;
+}
+
+.text_space{
+
+}
 .fraction_top{
   background-color: rgba(red, 0.1);
 }
@@ -102,7 +111,32 @@ body{
   background-color: rgba(blue, 0.1);
   border-top: 3px solid black;
 }
+.parent{
+  display: inline-block;
+  vertical-align: middle;
+}
+.input_area{
+  display: inline-block;
+}
 
+#input_area_0{
+  background-color: rgba(red, 0.1);
+}
+
+#input_area_0{
+  background-color: rgba(red, 0.1);
+}
+
+#input_area_0{
+  background-color: rgba(red, 0.1);
+}
+#input_area_0{
+  background-color: rgba(red, 0.1);
+}
+
+#input_area_0{
+  background-color: rgba(red, 0.1);
+}
 .d1{
   background-color:red;
 }

@@ -41,12 +41,25 @@ class TalkRoomsController < ApplicationController
   end
 
   def attemptpost
-    @valtype = params[:valtype]
-    @before_focus_id = params[:before_focus_id]
-    print @before_focus_id
+    @valtype = params[:valtype] #テキストフィールドの値
+    @before_focused_id = params[:before_focused_id] #記号挿入時の挿入位置保持用
+    @count_index = params[:count_index].to_i #記号挿入時のid付与用
+    @file_name = commit_to_file(params['commit'])
     respond_to do |format|
       format.html { redirect_to root_path}
       format.js { render 'attemptings/attempt'}
     end
   end
+
+  #commit => ファイル名変換
+  def commit_to_file(value)
+    html = '.html.erb'
+    case value
+    when 'frc'
+      'fraction' + html
+    else
+    end
+
+  end
+
 end

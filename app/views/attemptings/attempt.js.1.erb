@@ -1,0 +1,31 @@
+//let element = document.getElementById("sep");
+//element.className = "<%= @valtype %>";
+
+var current = document.activeElement;
+
+
+
+console.log('star function');
+console.log('before_f', <%= @before_focused_id %>);
+<%# 選択した位置に目印を挿入%>
+$(<%= @before_focused_id %>).append('<span id="load_point"></span>');
+$('#load_point').ready(function(){
+  var target = $('#load_point')
+  target.load('symbols/<%= @file_name %>', function(){
+    <%# 挿入したHTMLの子要素にID付与、　目印の削除%>
+    target.find('.child').each( function(index, element ) {
+      <% @count_index += 1 %>
+      var addId = "'sym_" + <%= @count_index.to_s %> + "'";
+      console.log(addId);
+      $(element).attr('id', addId);
+      target.removeAttr('id');
+    });
+  });
+for (var i=0; i<$(".comment").length; i++) {
+    $(".comment").eq(i).〜
+}
+
+  $('#count_index').val(<%= @count_index.to_s %>);
+  console.log(<%= @count_index %>);
+  console.log('end function');
+});
