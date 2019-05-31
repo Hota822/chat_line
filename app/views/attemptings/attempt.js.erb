@@ -1,15 +1,31 @@
-//let element = document.getElementById("sep");
-//element.className = "<%= @valtype %>";
 
-var current = document.activeElement;
-var element = document.getElementById(<%= @before_focus_id %>);
-console.log('start');
-console.log(<%= @before_focus_id %>);
-console.log(current);
-console.log(element);
-console.log('end');
-
-
-$(function(){
-  $(<%= @before_focus_id %>).load("symbols/fraction.html.erb");
-})
+console.log('star function');
+var parentElement = $(<%= @before_focused_id %>);
+parentElement.attr('contenteditable', 'false')
+<%# 選択した位置に目印を挿入%>
+var count_index = <%= @count_index.to_i %>;
+var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index + '">&nbsp;</div>'
+parentElement.append(newInputArea)
+parentElement.append('<span id="load_point"></span>');
+parentElement.append(newInputArea)
+console.log(newInputArea)
+$('#load_point').ready(function(){
+  var target = $('#load_point');
+  target.load('symbols/<%= @file_name %>', function(){
+    <%# 挿入したHTMLの子要素にID付与、　目印の削除%>
+    console.log('start for loop');
+    console.log(<%= @count_index%>);
+    for (var i=0; i<$('.child').length; i++) {
+      console.log($('.child').length);
+      count_index++;
+      var addId = "sym_" + count_index;
+      console.log(addId);
+      target.find('.child').eq(i).attr('id', addId);
+    };
+    console.log(<%= @count_index%>);
+    console.log('end for loop');
+    target.removeAttr('id');
+    $('#count_index').val(+ count_index);
+  });
+  console.log('end function');
+});

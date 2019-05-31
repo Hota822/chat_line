@@ -1,35 +1,27 @@
 
 
 
-  <div class="attempt">
-    <%= form_tag(attempt_path, remote: true) do %>
-      <div class="grid-x">
-        <div class="cell medium-1">
-          <div id="fraction">
-            <% val = '#sep' %>
-            <%#= link_to 'frc', onclick: "$(function(){$(#{val}).load('symbols/fraction.html');})" %>
-          </div>
-        </div>
-      </div>
-      <%= text_field_tag :valtype %>
-      <%= hidden_field_tag :before_focus_id, 'last' %>
-      <div class="text_space">
-        aaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        <div id="sep1"></div>
-        <div id="sep2"></div>
-        <div id="sep3"></div>
-        <div id="sep4"></div>
-        <div id="sep5"></div>
-        <div id="aaa">aaaaaaaaaaaaa</div>
-      </div>
-      <div>
-      <div><%= link_to 'link', '#', id: 'last' %></div>
+<div class="attempt">
+dddddddddddddddddddddd
+  <%= form_tag(attempt_path, remote: true) do %>
+    <%= text_field_tag :valtype %>
+    <%= hidden_field_tag :before_focused_id, 'input_area_0' %>
+    <%= hidden_field_tag :count_index, '1' %>
+    <div>
+      <div id="last"> agagagasetweta</div>
       <%= submit_tag "タイトルを変更する" %>
+      <%= submit_tag 'frc' %>
+    </div>
+    <div style="overflow: auto;">
+      <div class="text_space" >
+        <div id="input_area_0" class="input_area"></div>
       </div>
-    <% end %>
-  </div>
-
-<div class="block" id="block1">
-    <p class="hoge" id="hoge1">トリガー1</p>
-    <p class="fuga" id="fuga1">ターゲット1</p>
+    </div>
+  <% end %>
 </div>
+<div id="btns_box">
+  <button class="clickme_btn">Click Me</button>
+</div>
+
+<br>
+<button id="add_clickme_btn_btn">Add Button</button>
