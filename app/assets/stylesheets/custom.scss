@@ -64,11 +64,16 @@ body{
     }
 }
 
+/* talk room , etc */
 .sub_menu{
   border-right: 1px solid darkgray;
   background-color: rgba(orange, 0.5);
 }
+.talk_button{
+  margin-bottom: 0.1rem;
+}
 
+/* list contetnts(friend_list, talk_list, and more) */
 .list_contents{
   border-right: 1px solid darkgray;
   border-bottom: 1px solid darkgray;
@@ -100,16 +105,27 @@ body{
   margin-right: 0.1rem;
   margin-left: 0.1rem;
 }
-
-.text_space{
-
+[data-placeholder][data-placeholderactive=true][contenteditable=true]::before{
+  content: attr(data-placeholder);
+  opacity: 0.3;
 }
+
+#text_space{
+  padding-left: 1rem;
+  hr{
+    margin: 0;
+    background-color: black;
+    height: 0.05rem;
+  }
+}
+
 .fraction_top{
   background-color: rgba(red, 0.1);
+  /*border-bottom: 0.1rem solid black;*/
 }
 .fraction_bottom{
   background-color: rgba(blue, 0.1);
-  border-top: 3px solid black;
+  /*border-top: 0.1rem solid black;*/
 }
 .parent{
   display: inline-block;
@@ -117,40 +133,7 @@ body{
 }
 .input_area{
   display: inline-block;
-}
-
-#input_area_0{
-  background-color: rgba(red, 0.1);
-}
-
-#input_area_0{
-  background-color: rgba(red, 0.1);
-}
-
-#input_area_0{
-  background-color: rgba(red, 0.1);
-}
-#input_area_0{
-  background-color: rgba(red, 0.1);
-}
-
-#input_area_0{
-  background-color: rgba(red, 0.1);
-}
-.d1{
-  background-color:red;
-}
-.d2{
-  background-color:yellow;
-}
-.d3{
-  background-color: green;
-}
-.d4{
-  background-color:cyan;
-}
-.d5{
-  background-color: blue;
+  background-color: rgba($primary-color, 0.1);
 }
 
 .attempt{

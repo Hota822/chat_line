@@ -4,7 +4,21 @@
 <div class="attempt">
 dddddddddddddddddddddd
   <%= form_tag(attempt_path, remote: true) do %>
+    <%= text_field_tag :valtype %>  <%= form_tag(attempt_path, remote: true) do %>
     <%= text_field_tag :valtype %>
+    <%= hidden_field_tag :before_focused_id, 'input_area_0' %>
+    <%= hidden_field_tag :count_index, '1' %>
+    <div>
+      <div id="last"> agagagasetweta</div>
+      <%= submit_tag "タイトルを変更する" %>
+      <%= submit_tag 'frc' %>
+    </div>
+    <div style="overflow: auto;">
+      <div class="text_space" >
+        <div id="input_area_0" class="input_area"></div>
+      </div>
+    </div>
+  <% end %>
     <%= hidden_field_tag :before_focused_id, 'input_area_0' %>
     <%= hidden_field_tag :count_index, '1' %>
     <div>
@@ -25,3 +39,5 @@ dddddddddddddddddddddd
 
 <br>
 <button id="add_clickme_btn_btn">Add Button</button>
+<div style='float: left' contenteditable='true'>abcdefghijkl</div>
+<div style='float: left' contenteditable='true'>abcdefghijkl</div>

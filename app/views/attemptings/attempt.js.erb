@@ -4,28 +4,34 @@ var parentElement = $(<%= @before_focused_id %>);
 parentElement.attr('contenteditable', 'false')
 <%# 選択した位置に目印を挿入%>
 var count_index = <%= @count_index.to_i %>;
-var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index + '">&nbsp;</div>'
+var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index + '"></div>'
 parentElement.append(newInputArea)
 parentElement.append('<span id="load_point"></span>');
 parentElement.append(newInputArea)
-console.log(newInputArea)
 $('#load_point').ready(function(){
   var target = $('#load_point');
   target.load('symbols/<%= @file_name %>', function(){
     <%# 挿入したHTMLの子要素にID付与、　目印の削除%>
-    console.log('start for loop');
-    console.log(<%= @count_index%>);
     for (var i=0; i<$('.child').length; i++) {
-      console.log($('.child').length);
       count_index++;
       var addId = "sym_" + count_index;
-      console.log(addId);
       target.find('.child').eq(i).attr('id', addId);
     };
-    console.log(<%= @count_index%>);
-    console.log('end for loop');
     target.removeAttr('id');
     $('#count_index').val(+ count_index);
   });
   console.log('end function');
 });
+
+
+          var selection = window.getSelection();     //Selectionインスタンスの取得
+          var range = document.createRange();  //選択範囲をもたないRangeインスタンスを生成する
+          range.setStart(element.firstChild, 0);  //選択範囲の開始位置を最初の要素の前にもってくる
+          range.setEnd(element.firstChild, 0);   //選択範囲の終了位置を最初の要素の前にもってくる
+          //選択範囲は閉じられた状態のはずなのでtrueを返す
+          console.log(range.collapsed); 
+          console.log(range);
+          //とりあえず, 選択範囲をすべて解除
+          selection.removeAllRanges(); 
+          //(先頭に存在する閉じられた) 選択範囲を新たに追加することでキャレットが先頭に移動する
+          selection.addRange(range);
