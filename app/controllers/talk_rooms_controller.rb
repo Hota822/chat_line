@@ -40,14 +40,14 @@ class TalkRoomsController < ApplicationController
     render 'attemptings/attempt'
   end
 
-  def attemptpost
+  def symbols
     @valtype = params[:valtype] #テキストフィールドの値
     @before_focused_id = params[:before_focused_id] #記号挿入時の挿入位置保持用
     @count_index = params[:count_index].to_i #記号挿入時のid付与用
-    @file_name = commit_to_file(params['commit'])
+    @file_name, @transsymbol = commit_to_file(params['commit'])
     respond_to do |format|
       format.html { redirect_to root_path}
-      format.js { render 'attemptings/attempt'}
+      format.js { render 'talk_rooms/symbols'}
     end
   end
 
@@ -56,7 +56,7 @@ class TalkRoomsController < ApplicationController
     html = '.html.erb'
     case value
     when 'frc'
-      'fraction' + html
+      return ('fraction' + html), 'frc'
     else
     end
 

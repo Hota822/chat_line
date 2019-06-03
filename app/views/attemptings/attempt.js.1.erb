@@ -29,3 +29,108 @@ for (var i=0; i<$(".comment").length; i++) {
   console.log(<%= @count_index %>);
   console.log('end function');
 });
+//focus()でのクリックの発火
+//文字の分割
+
+var downkey = false;
+
+
+$(function () {
+  $(document).on("click", "#text_space", function () {
+    //選択した要素のIDを記録
+    //text_spaceの内、Bodyをクリックしたときは末尾にフォーカス
+    console.log('click text_space event')
+    var element = document.activeElement;
+    var elementId = $(element).attr('id');
+    if (elementId == null) {
+      var index = $('.input_area').length - 1;
+      var element = $('.input_area').eq(index);
+      var elementId = element.attr('id');
+      element.focus();
+    }
+    $('#before_focused_id').val(elementId);
+  });
+
+  $(document).on('focusin', '.input_area', function (e) {
+    //placeholder:初期エリア
+    delete (this.dataset.placeholderactive);
+    e.stopPropagation();
+  });
+  $(document).on('focusout', '.input_area', function (e) {
+    e.stopPropagation();
+    if (this.innerText.length === 0) {
+      this.dataset.placeholderactive = 'true';
+    }
+    if (downkey == true) {
+    console.log('focus out, keydown true');
+      var focusElementId = '#' + $('#downkey_focus_to').attr('data-focusid');
+      console.log(focusElementId);
+      downkey = false;
+      $(focusElementId).focus();
+      
+    }
+  });
+  $(document).on('focusin', '.symbol', function (e) {
+    //placeholder:symbolエリア
+    delete (this.dataset.placeholderactive);
+    e.stopPropagation();
+  });
+  $(document).on('focusout', '.symbol', function (e) {
+    if (this.innerText.length !== 0) return;
+    this.dataset.placeholderactive = 'true';
+    e.stopPropagation();
+  });
+
+  $(document).on('focusin', '#downkey_focus_to', function (e) {
+    e.stopPropagation();
+    var focusElementId = '#' + $(this).attr('data-focusid');
+    console.log(focusElementId);
+    $(focusElementId).focus();
+  });
+
+  $(document).on("keydown", "#text_space", function (e) {
+    //上下左右キーの動作変更
+    var selector = ".input_area, .symbol";
+    var element = $(document.activeElement);
+    var index = $(selector).index(element);
+    var focusElement = null;
+    switch (e.keyCode) {
+      case 38: //  ↑キー
+        if (index >= 0) {
+          for (var i = 1; i < 10; i++) {
+            focusElement = $(selector).eq(index - i);
+            if (focusElement.attr('contenteditable') == 'true') {
+              focusElement.focus();
+              break;
+            }
+          };
+        }
+        break;
+      case 40: //  ↓キー
+        for (var i = 1; i < 10; i++) {
+          focusElement = $(selector).eq(index + i);
+          if (focusElement.attr('contenteditable') == 'true') {
+            downkey = true
+            $('#downkey_focus_to').attr('data-focusid', focusElement.attr('id'));
+            $('#downkey_focus_to').focus();
+            break;
+          }
+        };
+        break;
+      case 37: //←キー
+        var caretLocation = window.getSelection().anchorOffset;
+        if (caretLocation == 0) {
+          //何も起こさないのもあり？
+          console.log('left');
+        }
+        break;
+      case 39: //→キー
+        var caretEnd = element.text().length;
+        var caretLocation = window.getSelection().anchorOffset;
+        if (caretLocation == caretEnd) {
+          console.log('right');
+        }
+        break;
+    }
+  });
+});
