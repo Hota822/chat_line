@@ -10,7 +10,6 @@ var count_index = <%= @count_index.to_i %>;
 var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index
                      + '" data-placeholder="&nbsp;" data-placeholderactive="true"'
                      + 'data-transsymbol="dir">' + beforeString + '</div>';
-<%# newInputAreaにもとの分を挿入する必要あり%>
 parentElement.append(newInputArea)
 parentElement.append('<div id="load_point" class="parent"></div>');
 count_index++;

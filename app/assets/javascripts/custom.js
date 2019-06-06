@@ -1,6 +1,22 @@
 //ToDo 文字の分割、a^２の自動変換, 他フォーマット用の変換（Σがでるように）
 //文字列の入力（数学モードで）、変数の入力
 
+//before_focused_id 保存
+function setFocusedId() {
+  console.log('aaaaa')
+  //選択した要素のIDを記録
+  //text_spaceの内、Bodyをクリックしたときは末尾にフォーカス
+  var element = document.activeElement;
+  var elementId = element.id
+  if (elementId == null) {
+    var index = $('.input_area').length - 1;
+    var element = $('.input_area').eq(index);
+    var elementId = element.attr('id');
+    element.focus();
+  }
+  $('#before_focused_id').val(elementId);
+  $('#before_caret').val(window.getSelection().anchorOffset);
+}
 //キャレット移動用関数（前後）
 function goToAfterElement() {
   var selector = ".input_area, .symbol";
@@ -74,7 +90,6 @@ function transSymbolToString(element) {
 function transFullToHalf(string, any) {
   // 半角変換
   if (any) {
-    console.log('true',any);
     var returnString = string.replace(/[!-~]/g,
       function (s) {
         // 文字コードをシフト
@@ -93,26 +108,17 @@ function transFullToHalf(string, any) {
   return returnString;
 }
 $(function () {
-  $(document).on("click", "#text_space", function () {
-    //選択した要素のIDを記録
-    //text_spaceの内、Bodyをクリックしたときは末尾にフォーカス
-    var element = document.activeElement;
-    console.log('click text_space event', element.id);
-    var elementId = $(element).attr('id');
-    if (elementId == null) {
-      var index = $('.input_area').length - 1;
-      var element = $('.input_area').eq(index);
-      var elementId = element.attr('id');
-      element.focus();
+  $(document).on('click', '#text_space', function (e) {
+    if (document.activeElement == document.body) {
+      setFocusedId();
     }
-    $('#before_focused_id').val(elementId);
-    $('#before_caret').val(window.getSelection().anchorOffset);
   });
 
   //Placeholder の設定
   $(document).on('focusin', '.input_area', function (e) {
     //placeholder:通常エリア
     delete (this.dataset.placeholderactive);
+    setFocusedId();
     e.stopPropagation();
   });
   $(document).on('focusout', '.input_area', function (e) {
@@ -124,6 +130,7 @@ $(function () {
   $(document).on('focusin', '.symbol', function (e) {
     //placeholder:symbolエリア
     delete (this.dataset.placeholderactive);
+    setFocusedId();
     e.stopPropagation();
   });
   $(document).on('focusout', '.symbol', function (e) { 
