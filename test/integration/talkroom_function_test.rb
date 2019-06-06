@@ -95,7 +95,6 @@ class TalkroomFunctionTest < ActionDispatch::IntegrationTest
     assert_match  @talk_room.name, response.body
     assert_select "a[href=?]", user_path(@friend_user)
     assert_select "a[href=?]", user_path(@other_friend)
-
   end
 
 end

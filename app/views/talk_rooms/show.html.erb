@@ -15,6 +15,7 @@
     <div class="cell medium-11">
       <%= form_tag(symbols_talk_room_path, remote: true) do %>
         <%= hidden_field_tag :before_focused_id, 'input_area_0' %>
+        <%= hidden_field_tag :before_caret, '0'%>
         <%= hidden_field_tag :count_index, '1' %>
         <div>
           <%= submit_tag "clr" %>
@@ -36,11 +37,14 @@
       <%= form_for(@new_talk) do |f| %>
         <%= f.hidden_field :user_id, {value: current_user.id} %>
         <%= f.hidden_field :talk_room_id, {value: @talk_room.id} %>
-        <%= f.hidden_field :content, {value: 'None' }%>
-        <%= hidden_field_tag :content_type, 'message' %>
+        <%= f.hidden_field :content, {value: 'None' } %>
+        <%= f.hidden_field :content_type, {value: 'message'} %>
         <div class='talk_button'><%= f.button 'Send', type: 'button', class: 'button expanded primary'%></div>
-        <div class='talk_button'><%= f.button 'Calc ', type: 'button', class: 'button expanded primary'%></div>
-        <div><%= text_field_tag :value %></div>
+      <% end %>
+      <%= form_tag(calculate_talk_room_path, remote: true, id: 'calc') do %>
+        <div class='talk_button'><%= button_tag 'Calc ',type: 'button', class: 'button expanded primary'%></div>
+        <%= hidden_field_tag :calculate_value, 0%>
+        <div class='talk_button'><%= text_field_tag :value %></div>
       <% end %>
     </div>
   </div>

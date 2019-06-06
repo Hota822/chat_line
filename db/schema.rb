@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_043329) do
+ActiveRecord::Schema.define(version: 2019_06_04_052849) do
 
   create_table "friend_relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_043329) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "talk_room_id"
+    t.string "content_type", default: "message"
     t.index ["user_id", "created_at"], name: "index_talks_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_talks_on_user_id"
   end

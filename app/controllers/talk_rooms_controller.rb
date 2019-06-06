@@ -43,11 +43,21 @@ class TalkRoomsController < ApplicationController
   def symbols
     @valtype = params[:valtype] #テキストフィールドの値
     @before_focused_id = params[:before_focused_id] #記号挿入時の挿入位置保持用
+    @before_caret = params[:before_caret] #記号の挿入位置保持用
     @count_index = params[:count_index].to_i #記号挿入時のid付与用
     @file_name, @transsymbol = commit_to_file(params['commit'])
     respond_to do |format|
-      format.html { redirect_to root_path}
+      format.html { redirect_to talk_room_path(params[:id]), flash: {alert: 'please activate javascript'}}
       format.js { render 'talk_rooms/symbols'}
+    end
+  end
+
+  def calculate
+    calculate_value = params[:calculate_value]
+    #@return_value = eval(calculate_value)
+    respond_to do |format|
+      format.html { redirect_to talk_room_path(params[:id]), flash: {alert: 'please activate javascript'}}
+      format.js { render 'talk_rooms/calculate'}
     end
   end
 
