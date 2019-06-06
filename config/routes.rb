@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       post '/invite', to: 'user_talkroom_relations#create'
       get  '/members',to: 'talk_rooms#members'
       post '/symbols',to: 'talk_rooms#symbols'
+      post '/calculate', to:'talk_rooms#calculate'
     end
   end
   resources :talks
