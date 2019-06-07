@@ -1,33 +1,21 @@
-
 console.log('star function');
-var parentElement = document.getElementById('<%= @before_focused_id %>');
+var parentElement = $(<%= @before_focused_id %>);
 <%# 選択した位置に目印を挿入%>
-var beforeString = '';
-var afterString = '';
-parentElement.setAttribute('contenteditable', 'false');
-if (parentElement.childNodes.length !== 0) {
-  for (var i = 0; i < parentElement.childNodes.length; i++) {
-    if (parentElement.childNodes[i].nodeType === 3) {
-      text = parentElement.childNodes[i].data;
-      beforeString = text.slice(0,<%= @before_caret %>);
-      afterString = text.slice(<%= @before_caret %>);
-      parentElement.removeChild(parentElement.childNodes[i])
-      break;
-    }
-  };
-}
-
+var beforeString = parentElement.text().slice(0,<%= @before_caret %>);
+var afterString = parentElement.text().slice(<%= @before_caret %> +1);
+parentElement.text('')
+parentElement.attr('contenteditable', 'false')
 var count_index = <%= @count_index.to_i %>;
 var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index
                      + '" data-placeholder="&nbsp;" data-placeholderactive="true"'
                      + 'data-transsymbol="dir">' + beforeString + '</div>';
-$(parentElement).append(newInputArea)
-$(parentElement).append('<div id="load_point" class="parent"></div>');
+parentElement.append(newInputArea)
+parentElement.append('<div id="load_point" class="parent"></div>');
 count_index++;
 var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index
                      + '" data-placeholder="&nbsp;" data-placeholderactive="true"'
                      + 'data-transsymbol="dir">' + afterString + '</div>';
-$(parentElement).append(newInputArea)
+parentElement.append(newInputArea)
 $('#load_point').ready(function(){
   var target = $('#load_point');
   target.load('symbols/<%= @file_name %>', function(){
@@ -48,4 +36,15 @@ $('#load_point').ready(function(){
     $('#count_index').val(+ count_index);
     $('#talk_content_type').val('formula');
   });
+  console.log('end function');
 });
+$.fn.getTextNodes = function() {
+  var $contents = $(this).contents();
+  if ($contents.length === 0) return;
+  return $contents.filter(function() {
+      if (this.nodeType === 3) {
+        //console.log(this.data);
+        return true;
+      }
+  });
+};

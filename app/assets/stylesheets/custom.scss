@@ -33,14 +33,10 @@
 .nav{
   overflow: hidden;
 }
-
-
 body{
   margin: auto;
   padding: auto;
 }
-
-
 .login_form{
   padding: 0 30%;
   margin: auto;
@@ -115,10 +111,8 @@ body{
 
 #text_space{
   padding-left: 1rem;
-  hr{
-    margin: 0;
-    background-color: black;
-    height: 0.05rem;
+  .input_area{
+    background-color: rgba($primary-color, 0.1);
   }
 }
 
@@ -133,12 +127,16 @@ body{
 .parent{
   display: inline-block;
   vertical-align: middle;
-}
-.input_area{
-  display: inline-block;
-  background-color: rgba($primary-color, 0.1);
+  hr{
+    margin: 0;
+    background-color: black;
+    height: 0.05rem;
+  }
 }
 
+.input_area{
+  display: inline-block;
+}
 .attempt{
   .s1{
     color: blue;
