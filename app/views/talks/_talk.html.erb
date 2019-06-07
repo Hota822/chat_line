@@ -10,7 +10,9 @@
           <% if talk.content_type == 'message' %>
             <%= talk.content %>
           <% else %>
-            <%= trans_formula_to_html(talk.content).html_safe %>
+            <div class="input_area">
+              <%= trans_formula_to_html(talk.content).html_safe %>
+            </div>
           <% end %>
         </div>
       <% end %>

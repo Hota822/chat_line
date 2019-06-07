@@ -64,12 +64,14 @@ class TalkRoomsController < ApplicationController
   #commit => ファイル名変換
   def commit_to_file(value)
     html = '.html.erb'
+    #return　'ファイル名', 'data_transsymbol(3) + inner_value_count(1)'
     case value
     when 'frc'
-      return ('fraction' + html), 'frc'
+      return ('fraction' + html), 'frc2'
     else
     end
-
   end
+
+  
 
 end

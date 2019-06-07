@@ -3,19 +3,19 @@
 
 //before_focused_id 保存
 function setFocusedId() {
-  console.log('aaaaa')
   //選択した要素のIDを記録
   //text_spaceの内、Bodyをクリックしたときは末尾にフォーカス
   var element = document.activeElement;
   var elementId = element.id
-  if (elementId == null) {
+  if (elementId === '') {
     var index = $('.input_area').length - 1;
     var element = $('.input_area').eq(index);
     var elementId = element.attr('id');
-    element.focus();
+    setTimeout(function () {
+      element.focus();
+    }, 0);
   }
   $('#before_focused_id').val(elementId);
-  $('#before_caret').val(window.getSelection().anchorOffset);
 }
 //キャレット移動用関数（前後）
 function goToAfterElement() {
@@ -23,7 +23,8 @@ function goToAfterElement() {
   var element = $(document.activeElement);
   var index = $(selector).index(element);
   var focusElement = null;
-  for (var i = 1; i < 10; i++) {
+  for (var i = 1; i < 5; i++) {
+    //for (var i = 1; i < element.length; i++) {
     focusElement = $(selector).eq(index + i);
     if (focusElement.attr('contenteditable') == 'true') {
       setTimeout(function () {
@@ -32,6 +33,7 @@ function goToAfterElement() {
       break;
     }
   };
+  $('#before_caret').val(window.getSelection().getRangeAt(0).startOffset);
 }
 function goToBeforeElement() {
   var selector = ".input_area, .symbol";
@@ -44,6 +46,7 @@ function goToBeforeElement() {
       focusElement.focus();
       break;
     }
+    $('#before_caret').val(window.getSelection().getRangeAt(0).startOffset);
   };
 }
 
@@ -84,7 +87,12 @@ function transSymbolToString(element) {
     for (var i = 0; i < $(element).children().length; i++) {
       transedString += transSymbolToString($(element).children().eq(i));
     };
-    return dataTransSymbol + '{' + transedString + '}';
+    if ($(element).attr('class') === 'parent') {
+      var section = ['{', '}']
+    } else {
+      var section = ['(', ']']
+    }
+    return dataTransSymbol +  section[0] + transedString + section[1];
   }
 }
 function transFullToHalf(string, any) {
@@ -97,7 +105,6 @@ function transFullToHalf(string, any) {
       }
     );
   } else {
-    console.log('false',any);
     var returnString = string.replace(/[!-\/|:-\?|\[-_|\{-\}]/g,
       function (s) {
         // 文字コードをシフト
@@ -126,6 +133,7 @@ $(function () {
     if (this.innerText.length === 0) {
       this.dataset.placeholderactive = 'true';
     }
+    $('#before_caret').val(window.getSelection().getRangeAt(0).startOffset);
   });
   $(document).on('focusin', '.symbol', function (e) {
     //placeholder:symbolエリア
@@ -137,22 +145,26 @@ $(function () {
     if (this.innerText.length !== 0) return;
     this.dataset.placeholderactive = 'true';
     e.stopPropagation();
+    $('#before_caret').val(window.getSelection().getRangeAt(0).startOffset);
   });
 
-  $(document).on("keyup", "#text_space", function () {
+  $(document).on("keyup", "#text_space", function (e) {
     var element = document.activeElement;
-    var text = element.innerText;
-    var range = document.createRange();
-    var selection = window.getSelection()
-    var caretLocation = selection.anchorOffset;
-    element.innerText = transFullToHalf(text, false);
-    setTimeout(function () {
-      range.setStart(element.childNodes[0], caretLocation);
-      range.setEnd(element.childNodes[0], caretLocation);
-      selection.removeAllRanges();
-      selection.addRange(range);
-      //selection.collapseToStart();
-    }, 0)
+    if (element.childNodes.length === 0) return;
+    if (e.key.match(/[!-\/|:-\?|\[-_|\{-\}]/g)) {
+      var text = element.innerText;
+      var range = document.createRange();
+      var selection = window.getSelection()
+      var caretLocation = selection.getRangeAt(0).startOffset;
+      element.innerText = transFullToHalf(text, false);
+      setTimeout(function () {
+        range.setStart(element.childNodes[0], caretLocation);
+        range.setEnd(element.childNodes[0], caretLocation);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        //selection.collapseToStart();
+      }, 0)
+    }
   });
 
   $(document).on("keydown", "#text_space", function (e) {
@@ -163,6 +175,7 @@ $(function () {
         break;
       case 'ArrowDown':
         goToAfterElement();
+        //キャレットがどっかに飛ぶが、無視
         break;
       case 'ArrowLeft':
         var caretLocation = window.getSelection().anchorOffset;
@@ -187,8 +200,8 @@ $(function () {
 
   $(document).on('click', 'button:contains("Send")', function () {
     $('#talk_content').val(getString());
-    //$('#new_talk').submit();
-    console.log($('#talk_content').val());
+    //console.log($('#talk_content').val());
+    $('#new_talk').submit();
   });
   $(document).on('click', 'button:contains("Calc")', function () {
     $('#calculate_value').val(getString());
