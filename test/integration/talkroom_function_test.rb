@@ -17,7 +17,7 @@ class TalkroomFunctionTest < ActionDispatch::IntegrationTest
     assert_select 'div.sub_menu', count: 3
     assert_match "Room : #{@talk_room.name}", response.body
     assert_select 'a[href=?]', invite_talk_room_path(@talk_room)
-    assert_select 'a[href=?]', members_talk_room_path(@talk_room)
+    assert_select 'a[href=?]', setting_talk_room_path(@talk_room, anchor: :members)
     #have user talk?
     assert_select 'div.list_contents div.icon'
     assert_select 'div.list_contents div.text'
@@ -87,14 +87,18 @@ class TalkroomFunctionTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "members have talk room members" do
+  test "setting have rename form and talk room members" do
     @talk_room = talk_rooms(:group)
     @other_friend = users(:david)
     log_in_test(@user)
-    get members_talk_room_path(@talk_room)
+    get setting_talk_room_path(@talk_room)
     assert_match  @talk_room.name, response.body
     assert_select "a[href=?]", user_path(@friend_user)
     assert_select "a[href=?]", user_path(@other_friend)
+    assert_select "input#talk_room_name", count: 1
+    patch setting_talk_room_path(@talk_room), params: {talk_rooms: {name: 'renamed'}}
+    @talk_room.reload
+    assert_equal 'renamed', @talk_room.name
   end
 
 end

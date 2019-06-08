@@ -1,0 +1,21 @@
+<%= form_for(@talk_room) do |f| %>
+  <div>
+    <h1 id="room_name">Talk Room Name</h1>
+    <div><%= @talk_room.name %></div>
+    <div class='grid-x'>
+      <div class='cell medium-10'>
+        <%= f.text_field :name , placeholder: 'new room name' %>
+      </div>
+      <div class='cell medium-2'>
+        <%= f.submit 'Rename talk room', class: ' expanded button primary'%>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h1 id="members">Talk Room Members</h1>
+    <div>
+      <%= render collection: @listusers, partial: 'layouts/listuser' %>
+    </div>
+    <h3><%= link_to 'Invite User', invite_talk_room_path(@talk_room) %></h3>
+  </div>
+<% end %>

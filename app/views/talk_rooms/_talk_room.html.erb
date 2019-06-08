@@ -19,8 +19,13 @@
         <% latest_talks = get_latest_talk(talk_room, sentence: view_params[:sentence]) %>
         <% latest_talks.each do |talk| %>
           <div class="text sentence">
-            <%= gravatar_for(talk.user, size: view_params[:size][:user])%>
-            <%= talk.content %>
+            <% if talk.content_type == 'message' %>
+              <%= talk.content %>
+            <% else %>
+              <div class="input_area">
+                <%= trans_formula_to_html(talk.content).html_safe %>
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>

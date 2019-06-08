@@ -1,10 +1,11 @@
 <div class="grid-x">
+  <%= %>
   <div class="cell medium-3 sub_menu">
-    <%="Room : #{@talk_room.name}" %>
+    <%= link_to "Room : #{@talk_room.name}", setting_talk_room_path(@talk_room, ancohr: :room_name) %>
   </div>
   <div class="cell medium-6 sub_menu">
     <%= "#{pluralize(@talk_room.users.count, 'Member')} :" %>
-    <%= link_to "show all members", members_talk_room_path(@talk_room) %>
+    <%= link_to "show all members", setting_talk_room_path(@talk_room, anchor: :members) %>
   </div>
   <div class="cell medium-3 sub_menu">
     <%= link_to "Invite User", invite_talk_room_path(@talk_room) %>

@@ -29,9 +29,19 @@ class TalkRoomsController < ApplicationController
     render 'users/search'
   end
 
-  def members
+  def edit
     @talk_room = TalkRoom.find(params[:id])
     @listusers = @talk_room.users
+  end
+
+  def update
+    @talk_room = TalkRoom.find(params[:id])
+    if @talk_room.update_attributes(talk_room_params)
+      flash.now['success'] = 'Setting updated'
+      render 'edit'
+    else
+      render 'edit'
+    end
   end
 
   def attempt
@@ -72,6 +82,8 @@ class TalkRoomsController < ApplicationController
     end
   end
 
-  
-
+  private
+    def talk_room_params()
+      params.require(:talk_rooms).permit(:name)
+    end
 end
