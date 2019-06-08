@@ -22,8 +22,7 @@ module ApplicationHelper
 
 
   #aaafrc{frc_t(bbb]frc_b(cc]}ddd  => a b/c d
-  #aaaafrc{frc_t{bfrc{frc_t(eee]frc_b(fffff]}bb}frc_b(ccc]}ddd a (b e/f bb) dd
-  #aaaafrc{frc_t(bfrc{frc_t(eee]frc_b(fffff]}bb]frc_b(ccc]}ddd 
+  #aaaafrc{frc_t(bfrc{frc_t(eee]frc_b(fffff]}bb]frc_b(ccc]}ddd  a (b e/f bb) dd
   def divide_string(string)
     before_index = string.index('{')
     unless before_index
@@ -49,10 +48,6 @@ module ApplicationHelper
     end
   end
   
- #aaafrc{frc_t(bbb]frc_b(cc]}ddd  => a b/c d
-  #aaaafrc{frc_t{bfrc{frc_t(eee]frc_b(fffff]}bb}frc_b(ccc]}ddd a (b e/f bb) dd
-  #aaaafrc{frc_t(bfrc{frc_t(eee]frc_b(fffff]}bb]frc_b(ccc]}ddd 
-  #trams_formula_to_htmlでsymoblをhtmlに変換
   def trans_symbol_to_html(string, data_trans_symbol, inner_value)
     return_string = ''
     string = divide_string(string) if string.include?('{')

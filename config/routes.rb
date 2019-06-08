@@ -22,9 +22,10 @@ Rails.application.routes.draw do
     member do
       get  '/invite', to: 'user_talkroom_relations#new'
       post '/invite', to: 'user_talkroom_relations#create'
-      get  '/members',to: 'talk_rooms#members'
       post '/symbols',to: 'talk_rooms#symbols'
       post '/calculate', to:'talk_rooms#calculate'
+      get  '/setting',to: 'talk_rooms#edit'
+      patch '/setting',to: 'talk_rooms#update'
     end
   end
   resources :talks
