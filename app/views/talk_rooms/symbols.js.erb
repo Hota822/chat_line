@@ -44,6 +44,9 @@ $('#load_point').ready(function(){
     };
     target.attr('data-transsymbol', '<%= @transsymbol %>')
     target.removeAttr('id');
+    brElement = $('.input_area_first').find('br').each(function (index, brElm) {
+      brElm.remove()
+    });
     <%# count_index, content_type の更新%>
     $('#count_index').val(+ count_index);
     $('#talk_content_type').val('formula');

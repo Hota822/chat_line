@@ -55,10 +55,19 @@ class TalkRoomsController < ApplicationController
     @before_focused_id = params[:before_focused_id] #記号挿入時の挿入位置保持用
     @before_caret = params[:before_caret] #記号の挿入位置保持用
     @count_index = params[:count_index].to_i #記号挿入時のid付与用
-    @file_name, @transsymbol = commit_to_file(params['commit'])
+    commit = params['commit']
+    case commit
+    when 'Del'
+      name_addition = '_del'
+    when 'AC'
+      name_addition = '_ac'
+    else
+      name_addition= ''
+      @file_name, @transsymbol = commit_to_file(commit)
+    end
     respond_to do |format|
       format.html { redirect_to talk_room_path(params[:id]), flash: {alert: 'please activate javascript'}}
-      format.js { render 'talk_rooms/symbols'}
+      format.js { render "talk_rooms/symbols#{name_addition}"}
     end
   end
 
