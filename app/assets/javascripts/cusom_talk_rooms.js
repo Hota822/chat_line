@@ -67,6 +67,7 @@ function getString() {
     //記号があるときは変換して返す
     for (var i = 0; i < target.length; i++) {
       returnString += transSymbolToString(target.eq(i));
+      console.log(target.eq(i))
     };
     //returnString.replace(/\s|&nbsp;|\r?\n/g, '');
     return returnString;
@@ -89,10 +90,13 @@ function transSymbolToString(element) {
     };
     if ($(element).attr('class') === 'parent') {
       var section = ['{', '}']
+    } else if (dataTransSymbol === 'dir') {
+      var section = ['', '']
+      dataTransSymbol = ''
     } else {
-      var section = ['(', ']']
+      var section = ['(', 'aaaaaa]']
     }
-    return dataTransSymbol +  section[0] + transedString + section[1];
+    return dataTransSymbol +  section[0]+ transedString + section[1];
   }
 }
 function transFullToHalf(string, any) {

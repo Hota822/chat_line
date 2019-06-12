@@ -96,11 +96,17 @@ body{
   input[type=checkbox] {
     transform: scale(2.5);
   }
+  hr{
+    margin: 0;
+    background-color: black;
+    height: 0.1rem;
+  }
 }
 
 /* math symbols */
 .symbol{
-  float: left;
+  /*float: left;*/
+  text-align: center;
   margin-right: 0.1rem;
   margin-left: 0.1rem;
 }
@@ -127,16 +133,18 @@ body{
 .parent{
   display: inline-block;
   vertical-align: middle;
+  text-align: center;
   hr{
     margin: 0;
     background-color: black;
-    height: 0.05rem;
+    height: 0.1rem;
   }
 }
 
 .input_area{
   display: inline-block;
 }
+
 .attempt{
   .s1{
     color: blue;
