@@ -18,6 +18,7 @@ module ApplicationHelper
   def trans_formula_to_html(string)
     #小文字の<等を削除
     @counter = 0
+    @counter_string = ''
     #raise
     divide_string(string)
   end
@@ -28,6 +29,7 @@ module ApplicationHelper
   #aafrc2{t(bb]b(ccfrc2{t(dd]b(ee]}]}
   #"frc2{t(a]b(b]}dir( ＋ frc2{t(a]b(c]}]"
   def divide_string(string)
+    return '' unless string
     before_index = string.index('{')
     unless before_index
       return add_division(string, 'input_area')
@@ -54,6 +56,7 @@ module ApplicationHelper
       else
         string_after = divide_string(string[(after_index +1)..((string.length) -1)])
       end
+      ##raise
       string_middle = trans_symbol_to_html(string[(before_index +1)..(after_index -1)],
                                             data_trans_symbol[0..2],
                                             data_trans_symbol[3])
@@ -63,27 +66,43 @@ module ApplicationHelper
 
   def trans_symbol_to_html(string, data_trans_symbol, inner_value)
     return_string = ''
+    tag_end = nil
     if string.include?('{')
+      #ネストしていた場合、それを先にHTML変換
       string = divide_string(string)
       symbol = 'parent'
     else
       symbol = 'symbol'
     end
+    #raise
     for i in 1..inner_value.to_i do
+      add_string = ''
       before_index = string.index('(')
       after_index = string.index(']')
-      return_string += add_division(string[(before_index +1)..(after_index -1)], symbol)
       case data_trans_symbol
       when 'frc'
-        return_string += '<hr>' if i == 1
+        return_string += '<hr>' if i == 2
+      when 'igl'
+        return_string += add_container if i == 2
+        tag_end ||= true
       end
+      child_class = "#{data_trans_symbol}_#{i.ordinalize}"
+      add_string = string[(before_index +1)..(after_index -1)] unless string == ''
+      return_string += add_division(add_string, "#{symbol} #{child_class}")
       string = string[(after_index +1)..((string.length) -1)]
     end
+    return_string += '</div>' if tag_end
     return_string
   end
 
   def add_division(string, class_value=nil)
     class_value = " class=#{class_value}" if class_value
-      return "<div#{class_value}>" + string + '</div>'
+    @counter += 1
+    raise if @counter == 2
+    return "<div#{class_value}>" + string + '</div>'
+  end
+
+  def add_container
+    return '<div class="symbol_container">'
   end
 end

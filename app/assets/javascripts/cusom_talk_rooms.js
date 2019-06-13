@@ -19,7 +19,7 @@ function setFocusedId() {
 }
 //キャレット移動用関数（前後）
 function goToAfterElement() {
-  var selector = ".input_area, .symbol";
+  var selector = ".input_area, .child";
   var element = $(document.activeElement);
   var index = $(selector).index(element);
   var focusElement = null;
@@ -36,7 +36,7 @@ function goToAfterElement() {
   $('#before_caret').val(window.getSelection().getRangeAt(0).startOffset);
 }
 function goToBeforeElement() {
-  var selector = ".input_area, .symbol";
+  var selector = ".input_area, .child";
   var element = $(document.activeElement);
   var index = $(selector).index(element);
   var focusElement = null;
@@ -57,9 +57,6 @@ function getString() {
   var selector = ".input_area_first"
   var returnString = '';
   var target = $(selector).children()
-  brElement = $(selector).find('br').each(function (index, brElm) {
-    brElm.remove()
-  });
   if (target.length == 0) {
     //記号入力していないとき、そのまま文字列を返す
     return $(selector).text();
@@ -67,7 +64,6 @@ function getString() {
     //記号があるときは変換して返す
     for (var i = 0; i < target.length; i++) {
       returnString += transSymbolToString(target.eq(i));
-      console.log(target.eq(i))
     };
     //returnString.replace(/\s|&nbsp;|\r?\n/g, '');
     return returnString;
@@ -76,25 +72,37 @@ function getString() {
 function transSymbolToString(element) {
   var dataTransSymbol = $(element).attr('data-transsymbol');
   if ($(element).attr('contenteditable') == 'true') {
+    //文字列を取得可能の判定
     if (dataTransSymbol == 'dir') {
+      //input_areaのときの処理：そのまま文字列を返す。
       return $(element).text();
     } else {
+      //symbolのときの処理：カッコで括って返す
       return dataTransSymbol + '(' + $(element).text() + ']';
     }
   } else if ($(element).attr('data-transsymbol') === undefined) {
     return ''
   } else {
+    //文字列取得不可（コンテナ）のときの処理：子要素をこの関数に投入
     var transedString = '';
     for (var i = 0; i < $(element).children().length; i++) {
       transedString += transSymbolToString($(element).children().eq(i));
     };
     if ($(element).attr('class') === 'parent') {
-      var section = ['{', '}']
-    } else if (dataTransSymbol === 'dir') {
-      var section = ['', '']
-      dataTransSymbol = ''
+      //記号の親要素のとき
+      var section = ['{', '}'];
+    } else if ($(element).attr('class').includes('child')) {
+      //記号の子要素のとき（ネストしていた場合）
+      var section = ['(', ']'];
+    } else if (dataTransSymbol === 'symbol') {
+      //記号の記号文字のとき
+      transedString = $(element).text()
+      var section = ['(', ']'];
     } else {
-      var section = ['(', 'aaaaaa]']
+      //input_areaのとき : } else if (dataTransSymbol === 'dir') {
+      //記号のコンテナのとき : } else if (dataTransSymbol === 'cnt') {
+      var section = ['', ''];
+      dataTransSymbol = '';
     }
     return dataTransSymbol +  section[0]+ transedString + section[1];
   }
@@ -139,13 +147,13 @@ $(function () {
     }
     $('#before_caret').val(window.getSelection().getRangeAt(0).startOffset);
   });
-  $(document).on('focusin', '.symbol', function (e) {
+  $(document).on('focusin', '.child', function (e) {
     //placeholder:symbolエリア
     delete (this.dataset.placeholderactive);
     setFocusedId();
     e.stopPropagation();
   });
-  $(document).on('focusout', '.symbol', function (e) { 
+  $(document).on('focusout', '.child', function (e) { 
     if (this.innerText.length !== 0) return;
     this.dataset.placeholderactive = 'true';
     e.stopPropagation();
@@ -203,8 +211,13 @@ $(function () {
   });
 
   $(document).on('click', 'button:contains("Send")', function () {
+    if ($('#talk_content_type').val() === 'formula') {
+      brElement = $('.input_area_first').find('br').each(function (index, brElm) {
+        brElm.remove()
+      });
+    }
     $('#talk_content').val(getString());
-    //console.log($('#talk_content').val());
+    console.log($('#talk_content').val());
     $('#new_talk').submit();
   });
   $(document).on('click', 'button:contains("Calc")', function () {

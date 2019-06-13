@@ -103,32 +103,21 @@ body{
   }
 }
 
-/* math symbols */
-.symbol{
-  /*float: left;*/
-  text-align: center;
-  margin-right: 0.1rem;
-  margin-left: 0.1rem;
-}
-[data-placeholder][data-placeholderactive=true][contenteditable=true]::before{
-  content: attr(data-placeholder);
-  opacity: 0.3;
-}
 
+/* math symbols */
 #text_space{
   padding-left: 1rem;
   .input_area{
     background-color: rgba($primary-color, 0.1);
   }
 }
-
-.fraction_top{
-  background-color: rgba(red, 0.1);
-  /*border-bottom: 0.1rem solid black;*/
+.child{
+  text-align: center;
+  margin-right: 0.1rem;
+  margin-left: 0.1rem;
 }
-.fraction_bottom{
-  background-color: rgba(blue, 0.1);
-  /*border-top: 0.1rem solid black;*/
+.symbol_container{
+  display: inline-block;
 }
 .parent{
   display: inline-block;
@@ -140,9 +129,35 @@ body{
     height: 0.1rem;
   }
 }
-
 .input_area{
   display: inline-block;
+}
+[data-placeholder][data-placeholderactive=true][contenteditable=true]::before{
+  content: attr(data-placeholder);
+  opacity: 0.3;
+}
+
+.frc_1st{
+  background-color: rgba(red, 0.1);
+  /*border-bottom: 0.1rem solid black;*/
+}
+.frc_2nd{
+  background-color: rgba(blue, 0.1);
+  /*border-top: 0.1rem solid black;*/
+}
+
+.igl_1st {
+  vertical-align: top;
+  font-size: 2rem;
+  display: inline-block;
+}
+.igl_2nd {
+  font-size: 0.7rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.7rem;
+}
+.igl_3rd {
+  font-size: 0.7rem;
 }
 
 .attempt{

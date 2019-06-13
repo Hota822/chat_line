@@ -31,15 +31,15 @@ $(parentElement).append(newInputArea)
 $('#load_point').ready(function(){
   var target = $('#load_point');
   target.load('symbols/<%= @file_name %>', function(){
-    <%# 挿入したHTMLの子要素にID, data-transymbol付与、　目印の削除%>
-    for (var i=0; i<$('.symbol').length; i++) {
+    <%# 挿入したHTMLの子要素にID, 親要素にdata-transymbol付与、　目印の削除%>
+    for (var i=0; i<$('.child').length; i++) {
       count_index++;
       var addId = "sym_" + count_index;
       if ($('#' + addId).length != 0) {
         addId += 'a'
-        target.find('.symbol').eq(i).attr('id', addId);
+        target.find('.child').eq(i).attr('id', addId);
       } else {
-        target.find('.symbol').eq(i).attr('id', addId);
+        target.find('.child').eq(i).attr('id', addId);
       }
     };
     target.attr('data-transsymbol', '<%= @transsymbol %>')

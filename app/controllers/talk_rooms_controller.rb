@@ -87,6 +87,10 @@ class TalkRoomsController < ApplicationController
     case value
     when 'frc'
       return ('fraction' + html), 'frc2'
+    when '∫'
+      return ('integral' + html), 'igl3'
+    when 'Σ'
+      return ('sigma' + html), 'sgm2'
     else
     end
   end
