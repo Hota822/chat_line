@@ -137,15 +137,6 @@ body{
   opacity: 0.3;
 }
 
-.frc_1st{
-  background-color: rgba(red, 0.1);
-  /*border-bottom: 0.1rem solid black;*/
-}
-.frc_2nd{
-  background-color: rgba(blue, 0.1);
-  /*border-top: 0.1rem solid black;*/
-}
-
 .igl_1st {
   vertical-align: top;
   font-size: 2rem;
@@ -157,6 +148,18 @@ body{
   margin-bottom: 0.7rem;
 }
 .igl_3rd {
+  font-size: 0.7rem;
+}
+
+.sgm_1st {
+  font-size: 0.7rem;
+}
+.sgm_2nd {
+  font-size: 2rem;
+  margin-top: -0.8rem;
+  margin-bottom: -0.8rem;
+}
+.sgm_3rd {
   font-size: 0.7rem;
 }
 
