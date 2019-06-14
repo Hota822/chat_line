@@ -90,7 +90,7 @@ class TalkRoomsController < ApplicationController
     when '∫'
       return ('integral' + html), 'igl3'
     when 'Σ'
-      return ('sigma' + html), 'sgm2'
+      return ('sigma' + html), 'sgm3'
     else
     end
   end

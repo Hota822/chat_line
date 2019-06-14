@@ -70,9 +70,9 @@ module ApplicationHelper
     if string.include?('{')
       #ネストしていた場合、それを先にHTML変換
       string = divide_string(string)
-      symbol = 'parent'
+      category = 'parent'
     else
-      symbol = 'symbol'
+      category = 'child'
     end
     #raise
     for i in 1..inner_value.to_i do
@@ -88,7 +88,7 @@ module ApplicationHelper
       end
       child_class = "#{data_trans_symbol}_#{i.ordinalize}"
       add_string = string[(before_index +1)..(after_index -1)] unless string == ''
-      return_string += add_division(add_string, "#{symbol} #{child_class}")
+      return_string += add_division(add_string, "#{category} #{child_class}")
       string = string[(after_index +1)..((string.length) -1)]
     end
     return_string += '</div>' if tag_end
@@ -96,9 +96,7 @@ module ApplicationHelper
   end
 
   def add_division(string, class_value=nil)
-    class_value = " class=#{class_value}" if class_value
-    @counter += 1
-    raise if @counter == 2
+    class_value = " class=\'#{class_value}\'" if class_value
     return "<div#{class_value}>" + string + '</div>'
   end
 
