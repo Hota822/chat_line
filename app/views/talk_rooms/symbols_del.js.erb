@@ -1,0 +1,11 @@
+var deleteElement = document.getElementById('<%= @before_focused_id %>');
+var parentElement = deleteElement.parentNode;
+for (var i = 0; i < 10; i++) {
+  if (parentElement.id == 'text_space' ) break;
+  if ( parentElement.classList.contains('parent')) {
+    parentElement.parentNode.removeChild(parentElement);
+    break;
+  } else {
+    parentElement = parentElement.parentNode;
+  }
+};

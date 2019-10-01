@@ -1,0 +1,19 @@
+rel_1:
+  user: michael
+  talk_room: vs
+
+rel_2:
+  user: lana
+  talk_room: vs
+
+rel_3:
+  user: michael
+  talk_room: group
+
+rel_4:
+  user: lana
+  talk_room: group
+
+rel_5:
+  user: david
+  talk_room: group

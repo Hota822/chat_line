@@ -1,0 +1,54 @@
+
+console.log('star function');
+var parentElement = document.getElementById('<%= @before_focused_id %>');
+<%# 選択した位置に目印を挿入%>
+var beforeString = '';
+var afterString = '';
+parentElement.setAttribute('contenteditable', 'false');
+if (parentElement.childNodes.length !== 0) {
+  for (var i = 0; i < parentElement.childNodes.length; i++) {
+    if (parentElement.childNodes[i].nodeType === 3) {
+      text = parentElement.childNodes[i].data;
+      beforeString = text.slice(0,<%= @before_caret %>);
+      afterString = text.slice(<%= @before_caret %>);
+      parentElement.removeChild(parentElement.childNodes[i])
+      break;
+    }
+  };
+}
+
+var count_index = <%= @count_index.to_i %>;
+var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index
+                     + '" data-placeholder="&nbsp;" data-placeholderactive="true"'
+                     + 'data-transsymbol="dir">' + beforeString + '</div>';
+$(parentElement).append(newInputArea)
+$(parentElement).append('<div id="load_point" class="parent"></div>');
+count_index++;
+var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index
+                     + '" data-placeholder="&nbsp;" data-placeholderactive="true"'
+                     + 'data-transsymbol="dir">' + afterString + '</div>';
+$(parentElement).append(newInputArea)
+$('#load_point').ready(function(){
+  var target = $('#load_point');
+  target.load('symbols/<%= @file_name %>', function(){
+    <%# 挿入したHTMLの子要素にID, 親要素にdata-transymbol付与、　目印の削除%>
+    for (var i=0; i<$('.child').length; i++) {
+      count_index++;
+      var addId = "sym_" + count_index;
+      if ($('#' + addId).length != 0) {
+        addId += 'a'
+        target.find('.child').eq(i).attr('id', addId);
+      } else {
+        target.find('.child').eq(i).attr('id', addId);
+      }
+    };
+    target.attr('data-transsymbol', '<%= @transsymbol %>')
+    target.removeAttr('id');
+    brElement = $('.input_area_first').find('br').each(function (index, brElm) {
+      brElm.remove()
+    });
+    <%# count_index, content_type の更新%>
+    $('#count_index').val(+ count_index);
+    $('#talk_content_type').val('formula');
+  });
+});

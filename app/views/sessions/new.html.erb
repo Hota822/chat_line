@@ -1,0 +1,19 @@
+
+<h3 class="text-center">Log in</h3>
+<div class="grid-x">
+  <div class=" text-center cell login_form">
+    <%= form_for(:session, url: login_path) do |f| %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.submit "log in", class: 'primary large button' %>
+    <% end %>
+
+    <p>New User? <%= link_to 'Sign up now!', signup_path %></p>
+    <p>Forgot password? <%= link_to 'Reset password', '#' %> </p>
+  </div>
+</div>

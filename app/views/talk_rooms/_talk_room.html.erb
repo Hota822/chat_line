@@ -1,0 +1,37 @@
+<%# for friend_user page, group talk %>
+  <% if talk_room.group_talk == true %>
+    <% view_params ={size: {list: 30, user: 20}, sentence: 1, classification: 'Group Talk' } %>
+  <% else %>
+    <% view_params ={size: {list: 50, user: 30}, sentence: 3, classification: '1 vs 1' } %>
+  <% end %>
+
+  <div class=list_contents>
+    <div class="grid-x own_list">
+      <div class="cell medium-3">
+        <% %>
+        <% talk_room.users.each do|user| %>
+          <%= gravatar_for(user, size: view_params[:size][:list] ) %>
+        <% end %>
+        <div><%= view_params[:classification] %></div>
+      </div>
+      <div class="cell medium-7">
+        <div class=" sentence text">Room Name : <%= talk_room.name %></div>
+        <% latest_talks = get_latest_talk(talk_room, sentence: view_params[:sentence]) %>
+        <% latest_talks.each do |talk| %>
+          <div class="text sentence">
+            <% if talk.content_type == 'message' %>
+              <%= talk.content %>
+            <% else %>
+              <div class="input_area">
+                <%= trans_formula_to_html(talk.content).html_safe %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="cell medium-2 text-right align-self-bottom ">
+        <%= link_to "Go to Talk Room", talk_room, class: 'button primary' %>
+      </div>
+    </div>
+  </div>
+

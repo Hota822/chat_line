@@ -1,0 +1,174 @@
+/*= require foundation */
+
+
+/* @import "foundation_and_overrides"; */
+/* Add imports of custom sass/scss files here */
+
+  $primary-color: #1779ba;
+  $secondary-color: #767676;
+  $success-color: #3adb76;
+  $warning-color: #ffae00;
+  $alert-color: #cc4b37;
+
+#logo{
+  float: left;
+  margin-right: 10px;
+  font-size: 2em;
+  color: $primary-color;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+#home_title{
+  font-size: 7em;
+  padding-top: 20px;
+}
+
+.home_button{
+  padding-bottom: 100px;
+}
+
+/*navigation bar*/
+.nav{
+  overflow: hidden;
+}
+body{
+  margin: auto;
+  padding: auto;
+}
+.login_form{
+  padding: 0 30%;
+  margin: auto;
+}
+
+.search_form{
+  padding: 3rem;
+}
+
+#error_explanation {
+  ul {
+    color: $alert-color;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+    color: red;
+    label{
+      color: $alert-color;
+    }
+}
+
+/* talk room , etc */
+.sub_menu{
+  border-right: 1px solid darkgray;
+  background-color: rgba(orange, 0.5);
+}
+.talk_button{
+  margin-bottom: 0.1rem;
+  #value{
+    font-size: 0.8rem;
+  }
+}
+
+/* list contetnts(friend_list, talk_list, and more) */
+.list_contents{
+  border-right: 1px solid darkgray;
+  border-bottom: 1px solid darkgray;
+  padding: 10px;
+  margin: 10px;
+  font-size: 2rem;
+  .list_button{
+    vertical-align: bottom;
+  }
+  .text{
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
+  .sentence{
+  border-bottom: 1px solid darkgray;
+  }
+  .icon{
+    font-size: 0.8rem;
+    border-right: 1px solid darkgray;
+  }
+  input[type=checkbox] {
+    transform: scale(2.5);
+  }
+  hr{
+    margin: 0;
+    background-color: black;
+    height: 0.1rem;
+  }
+}
+
+
+/* math symbols */
+#text_space{
+  padding-left: 1rem;
+  .input_area{
+    background-color: rgba($primary-color, 0.1);
+  }
+}
+.child{
+  text-align: center;
+  margin-right: 0.1rem;
+  margin-left: 0.1rem;
+}
+.symbol_container{
+  display: inline-block;
+}
+.parent{
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  hr{
+    margin: 0;
+    background-color: black;
+    height: 0.1rem;
+  }
+}
+.input_area{
+  display: inline-block;
+}
+[data-placeholder][data-placeholderactive=true][contenteditable=true]::before{
+  content: attr(data-placeholder);
+  opacity: 0.3;
+}
+
+.igl_1st {
+  vertical-align: top;
+  font-size: 2rem;
+  display: inline-block;
+}
+.igl_2nd {
+  font-size: 0.7rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.7rem;
+}
+.igl_3rd {
+  font-size: 0.7rem;
+}
+
+.sgm_1st {
+  font-size: 0.7rem;
+}
+.sgm_2nd {
+  font-size: 2rem;
+  margin-top: -0.8rem;
+  margin-bottom: -0.8rem;
+}
+.sgm_3rd {
+  font-size: 0.7rem;
+}
+
+.attempt{
+  .s1{
+    color: blue;
+  }
+  .s2{
+    color: red;
+  }
+
+}

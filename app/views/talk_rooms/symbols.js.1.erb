@@ -1,0 +1,50 @@
+console.log('star function');
+var parentElement = $(<%= @before_focused_id %>);
+<%# 選択した位置に目印を挿入%>
+var beforeString = parentElement.text().slice(0,<%= @before_caret %>);
+var afterString = parentElement.text().slice(<%= @before_caret %> +1);
+parentElement.text('')
+parentElement.attr('contenteditable', 'false')
+var count_index = <%= @count_index.to_i %>;
+var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index
+                     + '" data-placeholder="&nbsp;" data-placeholderactive="true"'
+                     + 'data-transsymbol="dir">' + beforeString + '</div>';
+parentElement.append(newInputArea)
+parentElement.append('<div id="load_point" class="parent"></div>');
+count_index++;
+var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index
+                     + '" data-placeholder="&nbsp;" data-placeholderactive="true"'
+                     + 'data-transsymbol="dir">' + afterString + '</div>';
+parentElement.append(newInputArea)
+$('#load_point').ready(function(){
+  var target = $('#load_point');
+  target.load('symbols/<%= @file_name %>', function(){
+    <%# 挿入したHTMLの子要素にID, data-transymbol付与、　目印の削除%>
+    for (var i=0; i<$('.symbol').length; i++) {
+      count_index++;
+      var addId = "sym_" + count_index;
+      if ($('#' + addId).length != 0) {
+        addId += 'a'
+        target.find('.symbol').eq(i).attr('id', addId);
+      } else {
+        target.find('.symbol').eq(i).attr('id', addId);
+      }
+    };
+    target.attr('data-transsymbol', '<%= @transsymbol %>')
+    target.removeAttr('id');
+    <%# count_index, content_type の更新%>
+    $('#count_index').val(+ count_index);
+    $('#talk_content_type').val('formula');
+  });
+  console.log('end function');
+});
+$.fn.getTextNodes = function() {
+  var $contents = $(this).contents();
+  if ($contents.length === 0) return;
+  return $contents.filter(function() {
+      if (this.nodeType === 3) {
+        //console.log(this.data);
+        return true;
+      }
+  });
+};

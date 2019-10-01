@@ -1,0 +1,2 @@
+module UserTalkroomRelationsHelper
+end

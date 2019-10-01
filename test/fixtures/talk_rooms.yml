@@ -1,0 +1,6 @@
+vs:
+  name: vs
+
+group:
+  name: group
+  group_talk: true

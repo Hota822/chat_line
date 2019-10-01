@@ -1,0 +1,50 @@
+
+<div>
+  <%= gravatar_for(@user)%>
+  <%= @user.name %>
+  <% case @user_relation %>
+  <% when 'current_user'%>
+    <h3>Talk List</h3>
+    <% if @talk_rooms.count == 0 %>
+      <div class="list_contents">
+        <div> You have no talks.Seach user and start to talk.</div>
+        <div><%= link_to 'Search User', search_users_path , class: 'text-center button primary'%></div>
+      </div>
+    <% else %>
+      <%= render @talk_rooms %>
+    <% end %>
+  <% when 'friend'%>
+    <h3>Your talk</h3>
+    <div>
+      <% if @each_talk_room.count == 0 %>
+        <div class="list_contents">
+          You have no 1vs1 talk.
+          <%= link_to "Start to talk with this user", talk_rooms_path(params: {id: @user.id }), method: :post,
+                                                                       class: 'button primary',
+                                                                       user_id: @user.id %>
+        </div>
+      <% else %>
+        <%= render collection: @each_talk_room, partial: 'talk_rooms/vsroom' %>
+      <% end %>
+    </div>
+    <div>
+      <% if @talk_rooms.count == 0 %>
+        <div class="list_contents">You have no group talk with this user</div>
+      <% else %>
+        <%= render  @talk_rooms %>
+      <% end %>
+    </div>
+  <% when 'non_friend' %>
+    <div class="list_contents">
+      <%= link_to 'Send Friend Request', friendrequest_user_path(@user) ,method: :post,
+          class: 'button primary large' %>
+    </div>
+  <% when 'already_request' %>
+    <% flash.now[:success] = "You still send friend request. Please wait to accept" %>
+  <% when 'received_request'%>
+    <% flash.now[:success] = "You received friendrequest from this user.If you accepet, click follow button" %>
+    <div class="list_contents">
+    <%= link_to 'Accept friend request', friendrelation_user_path(current_user) , method: :post,
+      class: 'button success large' %>
+  <% end %>
+</div>

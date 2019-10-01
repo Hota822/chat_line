@@ -1,0 +1,13 @@
+新規作成時の変更点
+　１．コントローラにファイル名変換を追加
+　２．ApplicationHelper/trans_symbol_to_htmlにhtmlを追加
+
+
+要追加事項
+
+  変数機能の追加
+
+  javascpript 文章変換、送信、保存機能
+
+  図の削除ボタン
+  

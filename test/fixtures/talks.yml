@@ -1,0 +1,33 @@
+<% time_now = Time.now %>
+<% 5.times do |n| %>
+talk_<%= n %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= time_now - (60 * n * 2 ) %>
+  talk_room: vs
+  user: michael
+
+talk_<%= n + 5 %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= time_now - (60 * n * 2 - 30) %>
+  talk_room: vs
+  user: lana
+
+talk_<%= n + 10 %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= time_now - (60 * n * 2) %>
+  talk_room: group
+  user: michael
+
+talk_<%= n + 15 %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= time_now - (60 * n * 2 - 20) %>
+  talk_room: group
+  user: lana
+
+talk_<%= n + 20 %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= time_now - (60 * n * 2 - 40) %>
+  talk_room: group
+  user: david
+
+<% end %>

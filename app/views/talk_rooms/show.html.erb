@@ -1,0 +1,56 @@
+<div class="grid-x">
+  <%= %>
+  <div class="cell medium-3 sub_menu">
+    <%= link_to "Room : #{@talk_room.name}", setting_talk_room_path(@talk_room, ancohr: :room_name) %>
+  </div>
+  <div class="cell medium-6 sub_menu">
+    <%= "#{pluralize(@talk_room.users.count, 'Member')} :" %>
+    <%= link_to "show all members", setting_talk_room_path(@talk_room, anchor: :members) %>
+  </div>
+  <div class="cell medium-3 sub_menu">
+    <%= link_to "Invite User", invite_talk_room_path(@talk_room) %>
+  </div>
+</div>
+
+  <div class="grid-x">
+    <div class="cell medium-11">
+      <%= form_tag(symbols_talk_room_path, remote: true) do %>
+        <%= hidden_field_tag :before_focused_id, 'input_area_0' %>
+        <%= hidden_field_tag :before_caret, '0'%>
+        <%= hidden_field_tag :count_index, '1' %>
+        <div>
+          <%= submit_tag "AC" %>
+          <%= submit_tag 'Del' %>
+          <%= submit_tag 'frc' %>
+          <%= submit_tag 'Σ' %>
+          <%= submit_tag '∫' %>
+          <%#= submit_tag '' %>
+        </div>
+        <hr>
+        <div id="text_space" >
+          <div id="input_area_0" class="input_area input_area_first" contenteditable='true'
+                data-placeholder='new messages/formula' data-placeholderactive='true'
+                data-transsymbol='dir'></div>
+        </div>
+        <hr>
+      <% end %>
+    </div>
+    <div class="cell medium-1">
+      <%= form_for(@new_talk) do |f| %>
+        <%= f.hidden_field :user_id, {value: current_user.id} %>
+        <%= f.hidden_field :talk_room_id, {value: @talk_room.id} %>
+        <%= f.hidden_field :content, {value: 'None' } %>
+        <%= f.hidden_field :content_type, {value: 'message'} %>
+        <div class='talk_button'><%= f.button 'Send', type: 'button', class: 'button expanded primary'%></div>
+      <% end %>
+      <%= form_tag(calculate_talk_room_path, remote: true, id: 'calc') do %>
+        <div class='talk_button'><%= button_tag 'Calc ',type: 'button', class: 'button expanded primary'%></div>
+        <%= hidden_field_tag :calculate_value, 0%>
+        <div class='talk_button'><%= text_field_tag :value %></div>
+      <% end %>
+    </div>
+  </div>
+　
+<div>
+  <%= render @talks %>
+</div>

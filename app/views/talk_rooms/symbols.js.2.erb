@@ -1,0 +1,39 @@
+
+console.log('star function');
+var parentElement = $(<%= @before_focused_id %>);
+parentElement.attr('contenteditable', 'false')
+<%# 選択した位置に目印を挿入%>
+var count_index = <%= @count_index.to_i %>;
+var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index
+                     + '" data-placeholder="&nbsp;" data-placeholderactive="true"'
+                     + 'data-transsymbol="dir"></div>';
+<%# newInputAreaにもとの分を挿入する必要あり%>
+parentElement.append(newInputArea)
+parentElement.append('<div id="load_point" class="parent"></div>');
+count_index++;
+var newInputArea = '<div class="input_area" contenteditable="true" id="input_area_' + count_index
+                     + '" data-placeholder="&nbsp;" data-placeholderactive="true"'
+                     + 'data-transsymbol="dir"></div>';
+parentElement.append(newInputArea)
+$('#load_point').ready(function(){
+  var target = $('#load_point');
+  target.load('symbols/<%= @file_name %>', function(){
+    <%# 挿入したHTMLの子要素にID付与、　目印の削除%>
+    for (var i=0; i<$('.symbol').length; i++) {
+      count_index++;
+      var addId = "sym_" + count_index;
+      if ($('#' + addId).length != 0) {
+        addId += 'a'
+        target.find('.symbol').eq(i).attr('id', addId);
+      } else {
+        target.find('.symbol').eq(i).attr('id', addId);
+      }
+    };
+    target.attr('data-transsymbol', '<%= @transsymbol %>')
+    target.removeAttr('id');
+    <%# count_index, content_type の更新%>
+    $('#count_index').val(+ count_index);
+    $('#content_type').val('formula');
+  });
+  console.log('end function');
+});
