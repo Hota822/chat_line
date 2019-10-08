@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# for talk rooms
 class TalkRoomsController < ApplicationController
   before_action :logged_in_user
 
@@ -6,7 +9,7 @@ class TalkRoomsController < ApplicationController
     @user = current_user
     if @talk_room.users.include?(@user)
       @talks = @talk_room.talks
-      @new_talk = @talk_room.talks.build()
+      @new_talk = @talk_room.talks.build
     else
       no_permission
     end
@@ -15,17 +18,18 @@ class TalkRoomsController < ApplicationController
   def create
     @user = User.find(params[:id])
     user_relation(@user)
-    if @user_relation == 'friend'
-      talk_room = TalkRoom.create()
-      talk_room.invite(@user)
-      talk_room.invite(current_user)
-      redirect_to talk_room
-    end
+    return unless @user_relation == 'friend'
+
+    talk_room = TalkRoom.create
+    talk_room.invite(@user)
+    talk_room.invite(current_user)
+    redirect_to talk_room
   end
 
   def new
     flash.now[:success] = 'please find user, and then stat to talk.<br>'
-    flash.now[:success] += 'If you want to group talk, please invite after 1vs1 talk'
+    flash.now[:success] += 'If you want to group talk, '
+    flash.now[:success] += 'please invite after 1vs1 talk'
     render 'users/search'
   end
 
@@ -36,25 +40,21 @@ class TalkRoomsController < ApplicationController
 
   def update
     @talk_room = TalkRoom.find(params[:id])
-    if @talk_room.update_attributes(talk_room_params)
-      flash.now['success'] = 'Setting updated'
-      render 'edit'
-    else
-      render 'edit'
-    end
+    flash.now['success'] = 'Setting updated' if @talk_room.update_attributes(talk_room_params)
+    render 'edit'
   end
 
   def attempt
-    #instead of show
+    # instead of show
     @valtype = 's2'
     render 'attemptings/attempt'
   end
 
   def symbols
-    @valtype = params[:valtype] #テキストフィールドの値
-    @before_focused_id = params[:before_focused_id] #記号挿入時の挿入位置保持用
-    @before_caret = params[:before_caret] #記号の挿入位置保持用
-    @count_index = params[:count_index].to_i #記号挿入時のid付与用
+    @valtype = params[:valtype] # text_field
+    @before_focused_id = params[:before_focused_id] # id of inserting when symbol is inserted
+    @before_caret = params[:before_caret] # caret of inserting when symbol is inserted
+    @count_index = params[:count_index].to_i # id counter to use inserting symbol
     commit = params['commit']
     case commit
     when 'Del'
@@ -65,6 +65,7 @@ class TalkRoomsController < ApplicationController
       name_addition= ''
       @file_name, @transsymbol = commit_to_file(commit)
     end
+    debugger
     respond_to do |format|
       format.html { redirect_to talk_room_path(params[:id]), flash: {alert: 'please activate javascript'}}
       format.js { render "talk_rooms/symbols#{name_addition}"}
@@ -73,17 +74,17 @@ class TalkRoomsController < ApplicationController
 
   def calculate
     calculate_value = params[:calculate_value]
-    #@return_value = eval(calculate_value)
+    # @return_value = eval(calculate_value)
     respond_to do |format|
       format.html { redirect_to talk_room_path(params[:id]), flash: {alert: 'please activate javascript'}}
       format.js { render 'talk_rooms/calculate'}
     end
   end
 
-  #commit => ファイル名変換
+  # commit => to file=name
   def commit_to_file(value)
     html = '.html.erb'
-    #return　'ファイル名', 'data_transsymbol(3) + inner_value_count(1)'
+    # return　'file-name', 'data_transsymbol(3) + inner_value_count(1)'
     case value
     when 'frc'
       return ('fraction' + html), 'frc2'
@@ -96,7 +97,8 @@ class TalkRoomsController < ApplicationController
   end
 
   private
-    def talk_room_params()
-      params.require(:talk_rooms).permit(:name)
-    end
+  
+  def talk_room_params()
+    params.require(:talk_rooms).permit(:name)
+  end
 end

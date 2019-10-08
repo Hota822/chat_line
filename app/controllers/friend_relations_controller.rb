@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# for mid table user-user
 class FriendRelationsController < ApplicationController
   before_action :logged_in_user
-  #before_action ->{ permitted_user?('recieved_request') }
+  # before_action ->{ permitted_user?('recieved_request') }
   before_action :request_user
 
   def create
@@ -15,10 +18,9 @@ class FriendRelationsController < ApplicationController
 
   def request_user
     user_relation(User.find(params[:id]))
-    unless @user_relation == 'received_request'
-      flash.now[:alert] = "Not Permitted"
-      redirect_to root_url
-    end
-  end
+    return if @user_relation == 'received_request'
 
+    flash.now[:alert] = 'Not Permitted'
+    redirect_to root_url
+  end
 end

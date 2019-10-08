@@ -1,0 +1,2 @@
+module KadaiHelper
+end

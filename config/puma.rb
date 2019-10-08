@@ -19,7 +19,7 @@ threads threads_count, threads_count
 preload_app!
 
 rackup      DefaultRackup
-port        ENV['PORT']     || 3000
+#port        ENV['PORT']     || 3000
 environment ENV['RACK_ENV'] || 'development'
 
 on_worker_boot do
@@ -45,3 +45,9 @@ end
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+
+# create puma socket when puma is started
+bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
+
+# run puma background
+daemonize true

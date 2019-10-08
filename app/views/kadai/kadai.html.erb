@@ -1,0 +1,43 @@
+<form name="api_form" action="https://192.168.33.10/api" method="GET">
+    <input class="radio" type="radio" name="id" value="1">1
+    <input class="radio" type="radio" name="id" value="2" checked="true">2
+    <input type="submit" value="submit">
+</form>
+
+
+<p>----------------------------------------------------------</p>
+<span id="api">selected value is here</span>
+
+<script>
+ $('.radio').each( function() {
+     $(this).on('click', executeApi)
+ })
+
+
+ /* 
+  * for( element of [...document.getElementsByClassName('radio')]){
+  *     //console.log('element',element)
+  *     element.addEventListener('click', executeApi )
+  * }
+  */
+ var element =  $('input[value="2"]')
+ element.focus()
+ //element.checked = true
+ element.prop('checked', true)
+ executeApi()
+
+
+ 
+ function executeApi() {
+     //console.log('enter function')
+     var radioButtonId = $(':focus').attr('value')
+     var param = "https://192.168.33.10/api?id=" + radioButtonId
+     $.get(param, function(value) {
+	 console.log(JSON.stringify(value))
+	 console.log(value)
+	 $('#api').text(JSON.stringify(value))
+     })
+ }
+
+
+</script>

@@ -1,0 +1,62 @@
+<form name="api_form" action="https://192.168.33.10/api" method="GET">
+    <input class="radio" type="radio" name="id" value="1">1
+    <input class="radio" type="radio" name="id" value="2" checked="true">2
+    <input type="submit" value="submit">
+</form>
+
+
+<p>----------------------------------------------------------</p>
+<span id="api">selected value is here</span>
+
+<script>
+ for( element of [...document.getElementsByClassName('radio')]){
+     console.log('element',element)
+     element.addEventListener('click', executeApi )
+ }
+
+ element =  document.querySelector('input[value="2"]')
+ element.focus()
+ element.checked = true
+ executeApi()
+
+
+ function executeApi() {
+     console.log('enter function')
+     var xhr = new XMLHttpRequest();
+     var radioButtonId = document.activeElement.value;
+     var param = "https://192.168.33.10/api?id=" + radioButtonId
+     xhr.onreadystatechange = function(){
+	 console.log(xhr.readyState)
+     	 if (xhr.readyState === 4 && xhr.status === 200) {
+	     var target = document.getElementById('api');
+	     console.log( xhr.responseXML)
+	     target.innerText = xhr.responseText;
+	 }
+     }
+     xhr.open('GET', param);
+     xhr.send();
+ }
+
+//setTimeout(function(){ target.click(); }, 3000)
+
+ /* 
+ var selection = [...document.getElementsByClassName('radio')].addEventListener('click', function(){
+     *    var xhr = new XMLHttpRequest();
+     *    var radioButtonId = document.activeElement.value;
+     *    console.log('enter function')
+     *    var param = "https://192.168.33.10/api?id=" + radioButtonId
+     *    console.log(param)
+     *    xhr.onreadystatechange = function(){
+	 console.log('enter onready')
+	 *    	 if (xhr.readyState === 4 && xhr.status === 200) {
+	     var target = document.getElementById('api');
+	     console.log( xhr.responseText)
+	     target.innerText = xhr.responseText;
+	     //target.innerText = JSON.parse(xhr.responseText);     
+	 }
+	 *    }
+     *    xhr.open('GET', param);
+     *    xhr.send();
+
+ })*/
+</script> 

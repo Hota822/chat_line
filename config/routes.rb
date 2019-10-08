@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   get  'attempt', to: 'talk_rooms#attempt'
   post 'attempt', to: 'talk_rooms#attemptpost'
 
+  get 'kadai', to: 'kadai#kadai'
+  get 'api',   to: 'kadai#api'
 end
